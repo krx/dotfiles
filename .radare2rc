@@ -1,0 +1,10 @@
+e scr.utf8 = true
+e bin.demangle = true
+e asm.demangle = true
+e asm.relsub = true
+eco solarized
+e cfg.fortunetype = tips,fun,nsfw
+#e dbg.slow = true
+"$context='drr; pd ($r-40);pxr 64@rsp'"
+"$ps='ds;$context'"
+"$pso='dso;$context'"

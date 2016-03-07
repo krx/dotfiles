@@ -1,0 +1,11 @@
+#!/bin/bash
+
+bg="131D24"
+fg="DDEEDD"
+
+
+if [ $1 ]
+then
+    rofi -show $1 -fg "#$fg" -bg "#$bg" -hlbg "#$fg" -hlfg "#$bg" -bc "#$bg" -location 0 -lines 8 -bw 0 -font "Inconsolata Bold 16" -separator-style none -opacity 85
+fi
+
