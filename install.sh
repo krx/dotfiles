@@ -43,6 +43,10 @@ function setup_tmux {
     link_home tmux.conf 
 }
 
+function setup_r2 {
+    link_home radare2rc 
+}
+
 function setup_i3 {
     mkdir -p ~/.config/i3
     ln -s i3config ~/.config/i3/config 
@@ -56,13 +60,4 @@ for i in "$@"; do
         echo "Unknown command $i"
     fi
 done
-
-#GLOBIGNORE=".:..:.git:$(basename $0):util:zsh"
-#shopt -s dotglob
-
-#for f in $(echo *)
-#do
-    #LINK=$HOME/$f
-    #if [ ! -d $LINK  ]; then ln -s $DIR/$f $LINK; fi
-#done
 
