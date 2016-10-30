@@ -48,18 +48,13 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " Theme {{{
 colorscheme gruvbox
-set guifont=Input:h12
+set guifont=Input:h14
 let g:gruvbox_contrast_dark="soft"
 set termguicolors
 set background=dark " dark | light "
 set t_Co=256
 "highlight LineNr ctermfg=grey ctermbg=none
 " }}}
-
-" Easy vimrc access
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
 
 " General settings {{{
 let mapleader = "," " Closer leader key
@@ -128,6 +123,10 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
             \ '\.o$', '\.so$', '\.egg$', '^\.git$', '__pycache__', '\.DS_Store' ]
 
 " }}}
+
+" Easy vimrc access
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Fiiiiiine
 nnoremap <up> <nop>
