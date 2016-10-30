@@ -48,6 +48,7 @@ let g:airline#extensions#whitespace#enabled = 0
 
 " Theme {{{
 colorscheme gruvbox
+set guifont=Input:h12
 let g:gruvbox_contrast_dark="soft"
 set termguicolors
 set background=dark " dark | light "
