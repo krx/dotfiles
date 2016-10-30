@@ -9,3 +9,7 @@
 	required = true
 [core]
 	editor = vim
+[rebase]
+	autoStash = true
+[pull]
+	rebase = true
