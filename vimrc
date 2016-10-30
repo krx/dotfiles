@@ -93,6 +93,11 @@ noremap <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 set clipboard=unnamed " normal OS clipboard interaction
+
+" Fullscreen in OS X
+if has("gui_macvim")
+    set fu
+endif
 " }}}
 
 " NERDTree settings {{{
