@@ -48,6 +48,7 @@ set shiftwidth=4 "indents also 4 spaces
 set shiftround "indent rount to next shiftwidth
 set backspace=indent,eol,start "smart-er backspaces
 set ww=b,s,h,l,<,>,[,] "set (b)ackspace, (s)pace, and arrows to jump lines
+set completeopt-=preview
 
 "Color stuff
 colorscheme solarized
