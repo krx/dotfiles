@@ -24,6 +24,7 @@ Plug 'tpope/vim-surround'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'yggdroot/indentline'
+Plug 'ctrlpvim/ctrlp.vim'
 
 call plug#end()
 " }}}
@@ -114,7 +115,14 @@ let NERDTreeShowFiles=1
 let NERDTreeShowHidden=1
 
 " Quit on opening files from the tree
-let NERDTreeQuitOnOpen=1
+"let NERDTreeQuitOnOpen=1
+
+" Auto open NERDTree
+autocmd vimenter * NERDTree
+autocmd vimenter * wincmd w
+
+" Quit if NERDTree is the last buffer
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Highlight the selected entry in the tree
 let NERDTreeHighlightCursorline=1
@@ -129,9 +137,19 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 
 " }}}
 
-" Easy vimrc access
+" Rainbow Parens {{{
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+" }}}
+
+" Quick vimrc access {{{
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+" }}}
 
 " Fiiiiiine
 nnoremap <up> <nop>
