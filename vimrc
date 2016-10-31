@@ -114,13 +114,6 @@ let NERDTreeShowBookmarks=1
 let NERDTreeShowFiles=1
 let NERDTreeShowHidden=1
 
-" Quit on opening files from the tree
-"let NERDTreeQuitOnOpen=1
-
-" Auto open NERDTree
-autocmd vimenter * NERDTree
-autocmd vimenter * wincmd w
-
 " Quit if NERDTree is the last buffer
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -168,7 +161,6 @@ set pastetoggle=<F2>
 
 " Bit faster
 nnoremap ; :
-inoremap jj <ESC>
 
 " Save on losing focus
 au FocusLost * :wa
@@ -198,4 +190,11 @@ nnoremap <Space> za
 vnoremap <Space> za
 
 let g:flake8_show_in_gutter=1
+
+" Show help in a vertical split
+autocmd FileType help wincmd L
+
+" C-s to save from n/i
+nnoremap <c-s> :w<CR>
+inoremap <c-s> <c-o>:w<CR>
 
