@@ -1,4 +1,5 @@
 set nocompatible
+set encoding=utf-8
 
 " Load vim-plug
 if empty(glob("~/.vim/autoload/plug.vim"))
@@ -66,11 +67,10 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-set encoding=utf-8
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set autoindent " always set autoindenting on"
 set copyindent " copy the previous indentation on autoindenting
-set visualbell           " don't beep
+set visualbell t_vb=     " don't beep
 set noerrorbells         " don't beep
 set ww=b,s,h,l,<,>,[,] " set (b)ackspace, (s)pace, and arrows to jump lines
 set cursorline " highlight the current line
