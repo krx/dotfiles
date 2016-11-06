@@ -84,7 +84,7 @@ set gdefault
 set showmatch     " set show matching parenthesis
 set ignorecase    " ignore case when searching
 set smartcase     " ignore case if search pattern is all lowercase, case-sensitive otherwise
-"set hlsearch      " highlight search terms
+set nohlsearch      " highlight search terms
 set incsearch     " show search matches as you type
 
 " Quickly clear search
@@ -198,3 +198,5 @@ autocmd FileType help wincmd L
 nnoremap <c-s> :w<CR>
 inoremap <c-s> <c-o>:w<CR>
 
+nnoremap <F10> :w<CR>:!./%<CR>
+inoremap <F10> <c-o>:w<CR><c-o>:!./%<CR>
