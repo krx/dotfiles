@@ -145,10 +145,10 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " }}}
 
 " Fiiiiiine
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
+"nnoremap <up> <nop>
+"nnoremap <down> <nop>
+"nnoremap <left> <nop>
+"nnoremap <right> <nop>
 "inoremap <up> <nop>
 "inoremap <down> <nop>
 "inoremap <left> <nop>
