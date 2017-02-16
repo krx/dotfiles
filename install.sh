@@ -51,9 +51,17 @@ function setup_r2 {
 
 function setup_i3 {
     mkdir -p ~/.config/i3
-    ln -s i3config ~/.config/i3/config 
+    ln -s "$DIR/i3config" ~/.config/i3/config 
 }
 
+function setup_termite {
+    mkdir -p ~/.config/termite
+    ln -s "$DIR/termiteconfig" ~/.config/termite/config 
+}
+
+function setup_xmonad {
+    link_home xmonad
+}
 
 for i in "$@"; do
     if [[ "$(type -t setup_$i)" == "function" ]]; then
