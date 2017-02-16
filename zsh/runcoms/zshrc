@@ -26,4 +26,8 @@ if [[ "$COLORTERM" == "xfce4-terminal"  ]] ; then
   export TERM=xterm-256color
 fi
 
+function mcd {
+    mkdir $1 && cd $1
+}
+
 stty -ixon
