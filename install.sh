@@ -20,8 +20,10 @@ function setup_zsh {
         zsh -c 'setopt EXTENDED_GLOB; for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done'
     fi
 
-    cp "$DIR/zsh/prompt_krx_setup" "$HOME/.zprezto/modules/prompt/functions"
-    cp -r "$DIR/zsh/runcoms" "$HOME/.zprezto"
+    ln -s "$DIR/zsh/prompt_krx_setup" "$HOME/.zprezto/modules/prompt/functions"
+
+    rm -rf "$HOME/.zprezto/runcoms"
+    ln -s "$DIR/zsh/runcoms" "$HOME/.zprezto/runcoms"
 }
 
 function setup_git {

@@ -9,9 +9,9 @@ endif
 " vim-plug setup {{{
 call plug#begin('~/.vim/plugged')
 
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'rdnetto/YCM-Generator'
+"Plug 'rdnetto/YCM-Generator'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdtree'
@@ -26,6 +26,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'yggdroot/indentline'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'neovimhaskell/haskell-vim'
 
 call plug#end()
 " }}}

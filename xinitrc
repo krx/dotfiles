@@ -37,7 +37,7 @@ sudo vmhgfs-fuse -o allow_other -o auto_unmount .host:/ /mnt/hgfs/
 pulseaudio --start
 
 # Start whichever DE I feel like using
-session=${1:-i3}
+session=${1:-xmonad}
 
 case $session in
     awesome           ) exec awesome;;
