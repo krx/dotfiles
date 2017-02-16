@@ -26,7 +26,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'yggdroot/indentline'
 Plug 'ctrlpvim/ctrlp.vim'
+
 Plug 'neovimhaskell/haskell-vim'
+Plug 'alx741/vim-hindent'
 
 call plug#end()
 " }}}
@@ -52,7 +54,7 @@ let g:airline#extensions#whitespace#enabled = 0
 " Theme {{{
 colorscheme gruvbox
 set guifont=Input:h14
-let g:gruvbox_contrast_dark="soft"
+let g:gruvbox_contrast_dark="medium"
 set termguicolors
 set background=dark " dark | light "
 set t_Co=256
@@ -201,3 +203,7 @@ inoremap <c-s> <c-o>:w<CR>
 
 nnoremap <F10> :w<CR>:!./%<CR>
 inoremap <F10> <c-o>:w<CR><c-o>:!./%<CR>
+
+" haskell indenting
+let g:haskell_indent_disable = 1
+let g:hindent_indent_size = 4
