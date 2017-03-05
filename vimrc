@@ -10,10 +10,14 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "Plug 'Valloric/YouCompleteMe'
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/echodoc.vim'
+
 Plug 'kien/rainbow_parentheses.vim'
-"Plug 'rdnetto/YCM-Generator'
 Plug 'altercation/vim-colors-solarized'
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'bling/vim-airline'
@@ -26,9 +30,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'yggdroot/indentline'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'smancill/conky-syntax.vim'
+Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'neovimhaskell/haskell-vim'
-Plug 'alx741/vim-hindent'
+"Plug 'alx741/vim-hindent'
 
 call plug#end()
 " }}}
@@ -47,7 +53,7 @@ let g:airline_right_sep=''
 let g:airline_left_alt_sep = '|'
 let g:airline_right_alt_sep = '|'
 
-" Disable the trailing whitespace section
+ "Disable the trailing whitespace section
 let g:airline#extensions#whitespace#enabled = 0
 " }}}
 
@@ -65,6 +71,13 @@ set t_Co=256
 let mapleader = "," " Closer leader key
 set hidden
 filetype indent on " smart indents based on filetypes
+
+" Disable comment continuing to next line
+set formatoptions-=crv
+
+" Strip trailing whitespace
+autocmd BufEnter * EnableStripWhitespaceOnSave
+
 " tabs n stuff
 set tabstop=4
 set shiftwidth=4
@@ -77,7 +90,10 @@ set visualbell t_vb=     " don't beep
 set noerrorbells         " don't beep
 set ww=b,s,h,l,<,>,[,] " set (b)ackspace, (s)pace, and arrows to jump lines
 set cursorline " highlight the current line
-set number " line numbers
+
+" line numbers
+set number
+set relativenumber
 
 " Search settings
 " Make regex behave normally
@@ -147,19 +163,61 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " }}}
 
-" Fiiiiiine
-"nnoremap <up> <nop>
-"nnoremap <down> <nop>
-"nnoremap <left> <nop>
-"nnoremap <right> <nop>
-"inoremap <up> <nop>
-"inoremap <down> <nop>
-"inoremap <left> <nop>
-"inoremap <right> <nop>
+" Auto-shebang {{{
+augroup Shebang
+  autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python2\<nl>\"|$
+  autocmd BufNewFile *.rb 0put =\"#!/usr/bin/env ruby\<nl>\"|$
+  autocmd BufNewFile *.sh 0put =\"#!/usr/bin/env bash\<nl>\"|$
+augroup END
+" }}}
+
+" Disable annoying ycm popup
+"set completeopt-=preview
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" neocomplete {{{
+let g:echodoc_enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#auto_completion_start_length = 1
+let g:neocomplete#enable_auto_close_preview=1
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+
+" This is actually C-Space
+inoremap <expr><NUL>  pumvisible() ? "\<C-n>" : neocomplete#start_manual_complete()
+
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" }}}
 
 " For moving over wrapped lines
 nnoremap j gj
 nnoremap k gk
+nnoremap <down> gj
+nnoremap <up>   gk
 set pastetoggle=<F2>
 
 " Bit faster
@@ -198,12 +256,13 @@ let g:flake8_show_in_gutter=1
 autocmd FileType help wincmd L
 
 " C-s to save from n/i
-nnoremap <c-s> :w<CR>
+nnoremap <c-s>      :w<CR>
 inoremap <c-s> <c-o>:w<CR>
 
-nnoremap <F10> :w<CR>:!./%<CR>
-inoremap <F10> <c-o>:w<CR><c-o>:!./%<CR>
+" Attempt to save and run
+nnoremap <F10>      :w<CR>:!clear; ./%<CR>
+inoremap <F10> <Esc>:w<CR>:!clear; ./%<CR>
 
 " haskell indenting
 let g:haskell_indent_disable = 1
-let g:hindent_indent_size = 4
+"let g:hindent_indent_size = 4
