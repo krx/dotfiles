@@ -63,6 +63,14 @@ function setup_xmonad {
     link_home xmonad
 }
 
+function setup_compton {
+    link_home compton.conf
+}
+
+function setup_xbindkeys {
+    link_home xbindkeysrc
+}
+
 for i in "$@"; do
     if [[ "$(type -t setup_$i)" == "function" ]]; then
         setup_$i

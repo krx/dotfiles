@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Fix nvidia
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+xrandr --dpi 96
+
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
@@ -31,10 +36,32 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 #Start vmware crap
-vmware-user-suid-wrapper
-sudo vmhgfs-fuse -o allow_other -o auto_unmount .host:/ /mnt/hgfs/
+#vmware-user-suid-wrapper
+#sudo vmhgfs-fuse -o allow_other -o auto_unmount .host:/ /mnt/hgfs/
 
+# Start up audio
 pulseaudio --start
+pacmd set-card-profile alsa_card.pci-0000_00_1f.3 output:iec958-stereo
+
+# Stary up automounting
+devmon &
+
+# Numlock on startx
+numlockx &
+
+# Setup keybindings
+xbindkeys
+
+# I like to disable the touchpad at startup
+synclient TouchpadOff=1
+
+~/.screenlayout/maindual.sh
+xsetroot -cursor_name left_ptr &
+nitrogen --restore &
+compton &
+volnoti -t 2 &
+xset s off -dpms
+#sudo NetworkManager &
 
 # Start whichever DE I feel like using
 session=${1:-xmonad}

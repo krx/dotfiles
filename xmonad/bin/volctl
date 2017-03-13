@@ -1,0 +1,28 @@
+#!/usr/bin/env python2
+import argparse
+import sys
+from subprocess import check_output
+
+parser = argparse.ArgumentParser()
+g = parser.add_mutually_exclusive_group(required=True)
+g.add_argument('-i', '--inc', type=int)
+g.add_argument('-d', '--dec', type=int)
+g.add_argument('-t', '--toggle', action='store_true')
+args = parser.parse_args(sys.argv[1:])
+
+# Change the volume
+cmd = ['pamixer']
+cmd += ['-t'] if args.toggle else ['-ui', args.inc] if args.dec is None else ['-ud', args.dec]
+check_output(map(str, cmd))
+
+# Show volume popup
+cmd = ['volnoti-show', check_output(['pamixer', '--get-volume'])]
+try:
+    # This will throw an exception if not muted
+    check_output(['pamixer', '--get-mute'])
+
+    # If we reached this then --get-mute was true
+    cmd += ['-m']
+except:
+    pass
+check_output(map(str, cmd))

@@ -1,0 +1,24 @@
+#!/usr/bin/env python2
+import argparse
+import sys
+from subprocess import check_output
+
+parser = argparse.ArgumentParser()
+g = parser.add_mutually_exclusive_group(required=True)
+g.add_argument('-i', '--inc', type=int)
+g.add_argument('-d', '--dec', type=int)
+args = parser.parse_args(sys.argv[1:])
+
+# Change the brightness
+cmd = ['light']
+cmd += ['-A', args.inc] if args.dec is None else ['-U', args.dec]
+check_output(map(str, cmd))
+
+# Show brightness popup
+check_output(map(str, [
+    'volnoti-show',
+    '-s',
+    '/usr/share/pixmaps/volnoti/display-brightness-symbolic.svg',
+    int(float(check_output('light').strip()))
+]))
+

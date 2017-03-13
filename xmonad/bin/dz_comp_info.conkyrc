@@ -1,0 +1,23 @@
+background no
+out_to_console yes
+out_to_x no
+update_interval 3
+total_run_times 0
+use_spacer none
+
+TEXT
+---
+cpus:
+    - ${cpu cpu0}
+    - ${cpu cpu1}
+    - ${cpu cpu2}
+    - ${cpu cpu3}
+    - ${cpu cpu4}
+    - ${cpu cpu5}
+    - ${cpu cpu6}
+    - ${cpu cpu7}
+mem: "${mem}"
+uptime: "${uptime_short}" 
+clock: "${time %a %d %b | %I:%M %p}"
+battery: "${battery BAT1}"
+EOF

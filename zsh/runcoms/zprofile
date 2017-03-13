@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='vim'
+export VISUAL='vim'
 export PAGER='less'
 
 #
@@ -46,6 +46,14 @@ path=(
   /usr/local/{bin,sbin}
   $path
 )
+
+# Additional PATH defs
+export PATH="/home/krx/bin:/home/krx/.xmonad/bin:$PATH"
+export PATH="/home/krx/tools/ctf-tools/bin:$PATH"
+export PATH="/home/krx/tools/JohnTheRipper/run:$PATH"
+
+# Fix awful ls color
+export LS_COLORS="$LS_COLORS:ow=30;42"
 
 #
 # Less

@@ -6,28 +6,37 @@ fi
 setopt +C #Forgot what this is for, but pretty sure it's important
 
 alias tmux='tmux -2'
-alias pip='sudo pip'
-alias gem='sudo gem'
+#alias pip='sudo pip'
+#alias gem='sudo gem'
 
 alias yaourt='yaourt --noconfirm'
 
 # Ease of use for pacaur
 alias pac='pacaur'
-alias pacs='pac -Sys'  # Search
+alias pacs='pac -Ss'   # Search
 alias paci='pac -Sy'   # Install
 alias pacU='pac -Syu'  # Full upgrade
 alias pacX='pac -Rns'  # Remove package
 alias pacXO='pacX $(pac -Qtdq)'  # Remove orphan packages
 
-export PATH="/home/krx/tools/ctf-tools/bin:$PATH"
-export PATH="/home/krx/tools/JohnTheRipper/run:$PATH"
-
 if [[ "$COLORTERM" == "xfce4-terminal"  ]] ; then
   export TERM=xterm-256color
 fi
 
+# Fix awful ls color
+export LS_COLORS="$LS_COLORS:ow=30;42"
+
+# Laziness
 function mcd {
-    mkdir $1 && cd $1
+    [[ -n "$1" ]] && mkdir -p "$1" && cd "$1"
 }
 
+# Stop breaking the terminal when i press C-s
 stty -ixon
+
+
+PATH="/home/krx/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/krx/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/krx/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/krx/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/krx/perl5"; export PERL_MM_OPT;
