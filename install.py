@@ -75,8 +75,9 @@ def setup_termite():
 
 if __name__ == '__main__':
     for dot in sys.argv[1:]:
+        print 'Installing {}...'.format(dot)
         try:
             link_home(basic_dots[dot]) if dot in basic_dots else globals()['setup_{}'.format(dot)]()
         except Exception as e:
-            print 'Error setting up {}:'.format(dot), e
+            print 'Error installing {}:'.format(dot), e
 
