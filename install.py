@@ -21,6 +21,12 @@ basic_dots = {
 }
 
 
+config_dots = {
+    'termite': ('termite', 'termiteconfig', 'config'),
+    'bspwm': ('bspwm', 'bspwmrc'),
+    'sxhkd': ('sxhkd', 'sxhkdrc')
+}
+
 def lnk(src, dst):
     if os.path.isfile(dst) or os.path.islink(dst):
         raise Exception('File at \'{}\' already exists'.format(dst))
@@ -31,10 +37,10 @@ def link_home(name):
     lnk(join(DIR, name), join(HOME, '.{}'.format(name)))
 
 
-def link_config(cdir, src, dst):
+def link_config(cdir, src, dst=None):
     confdir = join(HOME, '.config', cdir)
     mkdir_p(confdir)
-    lnk(join(DIR, src), join(confdir, dst))
+    lnk(join(DIR, src), join(confdir, dst or src))
 
 
 def mkdir_p(path):
@@ -69,15 +75,13 @@ def setup_gdb():
     link_home('gdbinit')
 
 
-def setup_termite():
-    link_config('termite', 'termiteconfig', 'config')
-
-
 if __name__ == '__main__':
     for dot in sys.argv[1:]:
         print 'Installing {}...'.format(dot)
         try:
-            link_home(basic_dots[dot]) if dot in basic_dots else globals()['setup_{}'.format(dot)]()
+            link_home(basic_dots[dot]) if dot in basic_dots else \
+            link_config(*config_dots[dot]) if dot in config_dots else \
+            globals()['setup_{}'.format(dot)]()
         except Exception as e:
             print 'Error installing {}:'.format(dot), e
 
