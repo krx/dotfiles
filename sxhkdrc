@@ -1,15 +1,39 @@
-#
-# bspwm hotkeys
-#
+# Reload sxhkd config
+alt + Escape
+    pkill -USR1 -x sxhkd
+
+# Launcher
+alt + p
+    rofi -show drun -modi "window,drun,ssh"
+
+# BSPWM {{{
+
+# Main controls {{{
+# Open new terminal
+alt + Return
+    termite
+
+# Open a new manually placed terminal
+alt + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}; termite
+
+# Swap the current node and the biggest node
+alt + shift + Return
+	bspc node -s biggest.active
 
 # quit bspwm normally
-alt + shift + Escape
+alt + super + Escape
 	bspc quit
 
+alt + shift + r
+    $HOME/.config/bspwm/bspwmrc
+
 # close and kill
-alt + q
+alt + shift + q
 	bspc node -c
 
+# }}}
+# Layout controls {{{
 # alternate between the tiled and monocle layout
 alt + m
 	bspc desktop -l next
@@ -18,124 +42,46 @@ alt + m
 alt + y
 	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
 
-# swap the current node and the biggest node
-alt + g
-	bspc node -s biggest
-
-#
-# state/flags
-#
-
 # set the window state
-alt + {a,shift + s,s,f}
+alt + {t,shift + s,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
-# set the node flags
-alt + shift + {x,y,z}
-	bspc node -g {locked,sticky,private}
-
-#
-# focus/swap
-#
+# }}}
+# Focus/Swap/Send {{{
 
 # focus the node in the given direction
 alt + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
-# focus the node for the given path jump
-alt + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
-
 # focus the next/previous node
-alt + {_,shift + }c
-	bspc node -f {next,prev}
-
-# focus the last node/desktop
-alt + {Tab,grave}
-	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-alt + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
+alt + {_,shift + }Tab
+	bspc node -f {next,prev}.active
 
 # focus or send to the given desktop
 alt + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-#
-# preselect
-#
-
-# preselect the direction
-alt + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}; \
-    xfce4-terminal
-
-# preselect the ratio
-alt + ctrl + {1-9}
-	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
-alt + ctrl + space
-	bspc node -p cancel
-
-# cancel the preselection for the focused desktop
-alt + ctrl + shift + space
-	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
-#
-# resize tiled/floating
-#
+# }}}
+# Resize/Move {{{
 
 # expand the tiled space in the given direction
-super + {h,j,k,l}
-	bspc node {@west -r -30,@south -r +30,@north -r -30,@east -r +30}
+alt + {Left,Down,Up,Right}
+    bspc node {@west -r -30,@south -r +30,@north -r -30,@east -r +30}
 
 # contract the tiled space in the given direction
-super + shift + {h,j,k,l}
+alt + shift + {Left,Down,Up,Right}
 	bspc node {@east -r -30,@north -r +30,@south -r -30,@west -r +30}
 
 # move a floating window
-alt + {Left,Down,Up,Right}
-	xdo move {-x -20,-y +20,-y -20,-x +20}
+alt + ctrl + {Left,Down,Up,Right}
+	bspc node --move {-20 0,0 +20,0 -20,+20 0}
 
-#
-# pointer focus/move/resize
-#
+# }}}
 
-# focus
-~button1
-	bspc pointer -g focus
+# }}}
+# Screenshots {{{
+# TODO: change these
 
-# start move/resize
-#alt + button{1-3}
-	#bspc pointer -g {move,resize_side,resize_corner}
-
-# end move/resize
-#alt + @button{1-3}
-	#bspc pointer -u
-
-# make sxhkd reload its configuration files:
-alt + Escape
-    pkill -USR1 -x sxhkd
-
-#
-# random hotkeys
-#
-alt + d
-    rofi -show drun -modi "window,drun,ssh"
-
-alt + Return
-    xfce4-terminal
-
-alt + shift + space
-    rofi-pass
-
-#
-# screenshots
-#
 Print
     cmdr scrot_all
 
@@ -145,18 +91,10 @@ alt + Print
 alt + shift + Print
     cmdr scrot_sel
 
-#
-# launchers, status, and lock
-#
-alt + q
-    cmdr disp_lock
+# }}}
+# Fn audio/display {{{
+# TODO: change these to xbindkeys
 
-alt + shift + p
-    firefox -private-window
-
-#
-# media keys
-#
 XF86AudioMute
     cmdr vol_toggle
 
@@ -175,9 +113,10 @@ XF86MonBrightnessDown
 XF86Display
     cmdr disp_toggle
 
-#
-# media controls
-#
+# }}}
+# Media controls {{{
+# TODO: xbindkeys
+
 alt + bracketleft
     cmdr mus_prev
 
@@ -187,11 +126,4 @@ alt + bracketright
 alt + backslash
     cmdr mus_toggle
 
-#
-# change languages
-#
-alt + shift + u
-    cmdr keyb_us
-
-alt + shift + i
-    cmdr keyb_intl
+# }}}
