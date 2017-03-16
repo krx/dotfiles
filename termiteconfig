@@ -32,7 +32,8 @@ filter_unmatched_urls = true
 [colors]
 # Gruvbox Scheme
 # hard contrast: background = #1d2021
-background = #282828
+# background = #282828
+background = rgba(40, 40, 40, 0.85)
 # soft contrast: background = #32302f
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
