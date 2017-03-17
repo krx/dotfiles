@@ -10,8 +10,9 @@
 [core]
 	editor = vim
 [rebase]
-	autoStash = true
+	autostash = true
 [pull]
 	rebase = true
+	autostash = true
 [push]
 	default = simple
