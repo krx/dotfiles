@@ -33,7 +33,7 @@ alt + ctrl + shift + r
 
 alert
 # close and kill
-alt + shift + q
+alt + q
 	bspc node -c
 
 # }}}
