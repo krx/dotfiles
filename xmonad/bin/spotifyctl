@@ -1,0 +1,38 @@
+#!/usr/bin/env python2
+
+import argparse
+import re
+import sys
+import subprocess as sp
+
+base = 'dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 '
+metadata = base + "org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'{}'"
+action = base + 'org.mpris.MediaPlayer2.Player.{}'
+
+def get_status():
+    status = sp.check_output(metadata.format('PlaybackStatus'), shell=True)
+    print re.search(r'string "([^"]+)"', status).group(1)
+
+def get_metadata(key):
+    data = sp.check_output(metadata.format('Metadata'), shell=True)
+    print re.search(r'string "([^"]+)"', data.split(key)[1]).group(1)
+
+def send_action(a):
+    print action.format(a)
+    sp.call(action.format(a), shell=True)
+
+opts = {
+    'status': get_status,
+    'artist': lambda: get_metadata('artist'),
+    'song':   lambda: get_metadata('title'),
+    'toggle': lambda: send_action('PlayPause'),
+    'next':   lambda: send_action('Next'),
+    'prev':   lambda: send_action('Previous'),
+}
+
+parser = argparse.ArgumentParser()
+parser.add_argument('cmd', choices=opts.keys())
+args = parser.parse_args(sys.argv[1:])
+
+opts[args.cmd]()
+
