@@ -49,11 +49,8 @@ devmon &
 # Numlock on startx
 numlockx &
 
-# Setup keybindings
-xbindkeys
-
 # I like to disable the touchpad at startup
-synclient TouchpadOff=1
+touch_toggle &
 
 ~/.screenlayout/maindual.sh
 xsetroot -cursor_name left_ptr &
@@ -61,10 +58,9 @@ nitrogen --restore &
 compton &
 volnoti -t 2 &
 xset s off -dpms
-#sudo NetworkManager &
 
 # Start whichever DE I feel like using
-session=${1:-xmonad}
+session=${1:-bspwm}
 
 case $session in
     awesome           ) exec awesome;;

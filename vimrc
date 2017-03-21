@@ -142,6 +142,7 @@ inoremap <F10> <Esc>:w<CR>:!clear; ./%<CR>
 
 " Bit faster
 nnoremap ; :
+vnoremap ; :
 
 
 " Keep selections when indenting

@@ -1,5 +1,8 @@
-[colors]
+; vim:ft=dosini
+
 ; Gruvbox color scheme {{{
+
+[colors]
 ; probably (definitely) don't need all of these
 dark0_hard     = #1d2021
 dark0          = #282828
@@ -47,26 +50,15 @@ faded_aqua     = #427b58
 faded_orange   = #af3a03
 
 ; }}}
+; Top Bar {{{
 
-background = ${colors.dark0_hard}
-background-alt = ${colors.dark2}
-foreground = ${colors.light4}
-foreground-alt = ${colors.dark2}
-secondary = #e60053
+; Config {{{
 
-# Icons for the section separators
-[corners]
-tl = 
-tr = 
-bl = 
-br = 
-
-
-# Top Bar {{{
 [bar/top]
+monitor = ${env:MONITOR:eDP-1-1}
 width = 100%
 height = 20
-fixed-center = false
+fixed-center = true
 wm-restack = bspwm
 
 line-size = 2
@@ -78,6 +70,7 @@ foreground = ${colors.light4}
 font-0 = Input Mono Narrow:pixelsize=10;2
 font-1 = FontAwesome:pixelsize=11;2
 font-3 = Material Icons:pixelsize=13;4
+font-4 = UbuntuMono Nerd Font:pixelsize=24;5
 
 ; Seems to be the only one that correctly renders the corner triangles
 font-2 = HeavyData Nerd Font:pixelsize=15;3
@@ -85,16 +78,8 @@ font-2 = HeavyData Nerd Font:pixelsize=15;3
 modules-left = bspwm xwindow
 modules-right = cpu memory battery date
 
-[module/xwindow]
-type = internal/xwindow
-label-background = ${colors.dark0_soft}
-label-foreground = ${colors.light4}
-label = %title:0:50:...%
-label-padding = 1
-
-format-suffix = ${corners.tl}
-format-suffix-background = ${colors.dark0_hard}
-format-suffix-foreground = ${colors.dark0_soft}
+;}}}
+; Left {{{
 
 [module/bspwm]
 type = internal/bspwm
@@ -121,9 +106,25 @@ label-empty-foreground = ${colors.dark4}
 label-empty-background = ${colors.light4}
 label-empty-padding = 1
 
+[module/xwindow]
+type = internal/xwindow
+label-background = ${colors.dark0_soft}
+label-foreground = ${colors.light4}
+label = %title:0:50:...%
+label-padding = 1
+
+exec = bash -c "xtitle || echo 'ghost'"
+
+format-suffix = ${corners.tl}
+format-suffix-background = ${colors.dark0_hard}
+format-suffix-foreground = ${colors.dark0_soft}
+
+; }}}
+; Right {{{
+
 [module/cpu]
 type = internal/cpu
-interval = 0.5
+interval = 1
 format = <label> <ramp-coreload>
 
 format-prefix = ${corners.tr}
@@ -143,6 +144,7 @@ ramp-coreload-5 = ▆
 ramp-coreload-6 = ▇
 ramp-coreload-7 = █
 
+
 [module/memory]
 type = internal/memory
 interval = 2
@@ -155,32 +157,50 @@ format-padding = 2
 label =  %gb_used%
 ;label-underline = ${colors.bright_green}
 
+
 [module/battery]
 type = internal/battery
-battery = BAT0
-adapter = ACAD
+battery = BAT1
+adapter = ADP1
 full-at = 98
 
-;format-charging = <animation-charging> <label-charging>
-;format-charging-underline = #ffb52a
+format-charging-padding    = 1
+format-discharging-padding = 1
+format-full-padding        = 1
 
-;format-discharging = <ramp-capacity> <label-discharging>
-;format-discharging-underline = ${colors.neutral_red}
+format-charging-background    = ${colors.dark0_soft}
+format-discharging-background = ${colors.dark0_soft}
+format-full-background        = ${colors.dark0_soft}
 
-;format-full-prefix = " "
-;format-full-prefix-foreground = ${colors.foreground-alt}
-;format-full-underline = ${colors.neutral_red}
+format-charging-foreground    = ${colors.light4}
+format-discharging-foreground = ${colors.light4}
+format-full-foreground        = ${colors.light4}
 
-;ramp-capacity-0 = 
-;ramp-capacity-1 = 
-;ramp-capacity-2 = 
-;ramp-capacity-foreground = ${colors.foreground-alt}
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
 
-;animation-charging-0 = 
-;animation-charging-1 = 
-;animation-charging-2 = 
-;animation-charging-foreground = ${colors.foreground-alt}
-;animation-charging-framerate = 750
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.bright_green}
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.bright_red}
+ramp-capacity-1 = 
+ramp-capacity-1-foreground = ${colors.bright_red}
+ramp-capacity-2 = 
+ramp-capacity-2-foreground = ${colors.bright_orange}
+ramp-capacity-3 = 
+ramp-capacity-3-foreground = ${colors.bright_green}
+ramp-capacity-4 = 
+ramp-capacity-4-foreground = ${colors.bright_green}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-framerate = 750
+animation-charging-foreground = ${colors.bright_green}
+
 
 [module/date]
 type = internal/date
@@ -199,49 +219,68 @@ label = %date% | %time%
 label-padding = 1
 label-background = ${colors.light4}
 
-# }}}
-# Bottom bar {{{
+; }}}
+
+; }}}
+; Bottom bar {{{
+
+; Config {{{
+
 [bar/bot]
-width = 100%
-height = 20
-fixed-center = true
+inherit = bar/top
+; Extra things to display only on the laptop screen
+monitor = eDP-1-1
 bottom = true
-wm-restack = bspwm
 
-background = ${colors.dark0_hard}
-foreground = ${colors.light4}
-
-font-0 = Input Mono Narrow:pixelsize=10;2
-font-1 = FontAwesome:pixelsize=11;2
-font-3 = Material Icons:pixelsize=13;4
-
-; Seems to be the only one that correctly renders the corner triangles
-font-2 = HeavyData Nerd Font:pixelsize=15;3
-
-modules-left = pkg
-modules-right = volume
+modules-left = traysuffix
+modules-center = spotify
+modules-right = pkg volume
 
 tray-position = left
 tray-background = ${colors.light4}
 tray-padding = 1
 
+; }}}
+; Left {{{
+
+[module/traysuffix]
+type = custom/text
+content = ${corners.bl}
+
+; }}}
+; Center {{{
+
+[module/spotify]
+type = custom/script
+interval = 1
+label = %output%
+label-foreground = ${colors.light4}
+exec = ~/.config/polybar/module_spotify.py
+
+; Jank controls
+click-left  = spotifyctl toggle
+scroll-down = spotifyctl prev
+scroll-up   = spotifyctl next
+
+; }}}
+; Right {{{
 
 [module/pkg]
 type = custom/script
-interval = 3600
+interval = 1200
 
-format-prefix = ${corners.bl}
-format-prefix-foreground = ${colors.light4}
+format-prefix = ${corners.br}
+format-prefix-foreground = ${colors.dark0_soft}
+
+format-suffix = ${corners.br}
+format-suffix-background = ${colors.dark0_soft}
+format-suffix-foreground = ${colors.light4}
 
 format = <label>
-format-background = ${colors.dark0_soft}
 label = " %output:0:30% "
+label-background = ${colors.dark0_soft}
 
-format-suffix = ${corners.bl}
-format-suffix-background = ${colors.dark0_hard}
-format-suffix-foreground = ${colors.dark0_soft}
-
-exec = .config/polybar/pkg.sh
+exec = ~/.config/polybar/pkg.sh
 exec-if = "curl google.com > /dev/null"
 
 
@@ -283,12 +322,68 @@ bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.dark0_soft}
 
 
-[module/spotify]
-type = custom/script
+;[module/spotifyctl]
+;type = custom/script
+;interval = 1
+
+;format-prefix = ${corners.br}
+;format-prefix-foreground = ${colors.dark0_soft}
+
+;format-suffix = ${corners.br}
+;format-suffix-background = ${colors.dark0_soft}
+
+;label = %output%
+;label-font = 5
+;label-padding = 1
+;label-background = ${colors.dark0_soft}
+;label-foreground = ${colors.light4}
+
+;exec = ~/.config/polybar/module_spotifyctl.py
+
+;[module/spotifyctl]
+;type = custom/ipc
+
+;format-prefix = ${corners.br}
+;format-prefix-background = ${colors.dark0_hard}
+;format-prefix-foreground = ${colors.dark0_soft}
+
+;format-suffix = ${corners.br}
+;format-suffix-background = ${colors.dark0_soft}
+;format-suffix-foreground = ${colors.light4}
+
+;hook-0 = ~/.config/polybar/module_spotifyctl.py %pid%
+;initial = 1
 
 
 
-# }}}
+; }}}
+
+; }}}
+; External bars {{{
+
+[bar/extbot]
+inherit = bar/top
+monitor = ${env:MONITOR:HDMI-1-3}
+bottom = true
+
+modules-left =
+modules-center = spotify
+modules-right = volpre volume
+
+[module/volpre]
+type=custom/text
+content = ${corners.br}
+
+; }}}
+; Misc {{{
+
+[corners]
+; Icons for the section separators
+tl = 
+tr = 
+bl = 
+br = 
+
 
 [settings]
 screenchange-reload = true
@@ -297,4 +392,4 @@ screenchange-reload = true
 ;compositing-foreground = source
 ;compositing-border = over
 
-; vim:ft=dosini
+; }}}

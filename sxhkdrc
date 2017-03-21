@@ -4,7 +4,7 @@ alt + Escape
 
 # Launcher
 alt + p
-    rofi -show drun -modi "window,drun,ssh"
+    startrofi run
 
 # BSPWM {{{
 
@@ -19,7 +19,7 @@ alt + ctrl + {h,j,k,l}
 
 # Swap the current node and the biggest node
 alt + shift + Return
-	bspc node -s biggest.active
+	bspc node -s biggest.local
 
 # quit bspwm normally
 alt + super + Escape
@@ -59,7 +59,7 @@ alt + {_,shift + }{h,j,k,l}
 
 # focus the next/previous node
 alt + {_,shift + }Tab
-	bspc node -f {next,prev}.active
+	bspc node -f {next,prev}.local
 
 # focus or send to the given desktop
 alt + {_,shift + }{1-9,0}
@@ -84,50 +84,62 @@ alt + ctrl + {Left,Down,Up,Right}
 
 # }}}
 # Screenshots {{{
-# TODO: change these
 
 Print
-    cmdr scrot_all
+    maim --hidecursor /tmp/screenshot.png; \
+    URL=$(imgurbash2 /tmp/screenshot.png | sed -E 's/ .+//g'); \
+    notify-send 'Screenshot uploaded'
+
 
 alt + Print
-    cmdr scrot_win
-
-alt + shift + Print
-    cmdr scrot_sel
+    maim --hidecursor -s /tmp/screenshot.png; \
+    URL=$(imgurbash2 /tmp/screenshot.png | sed -E 's/ .+//g'); \
+    notify-send 'Screenshot uploaded'
 
 # }}}
 # Fn audio/display {{{
-# TODO: change these to xbindkeys
 
 XF86AudioMute
-    cmdr vol_toggle
+    volctl -t
 
 XF86AudioLowerVolume
-    cmdr vol_dec
+    volctl -d 2
 
 XF86AudioRaiseVolume
-    cmdr vol_inc
-
-XF86MonBrightnessUp
-    cmdr disp_inc
+    volctl -i 2
 
 XF86MonBrightnessDown
-    cmdr disp_dec
+    brightctl -d 5
 
-XF86Display
-    cmdr disp_toggle
+XF86MonBrightnessUp
+    brightctl -i 5
 
 # }}}
 # Media controls {{{
-# TODO: xbindkeys
 
 alt + bracketleft
-    cmdr mus_prev
+    spotifyctl prev
 
 alt + bracketright
-    cmdr mus_next
+    spotifyctl next
 
-alt + backslash
-    cmdr mus_toggle
+Pause
+    spotifyctl toggle
 
 # }}}
+# Misc {{{
+
+super + l
+    i3lock-krx
+
+XF86Sleep
+    suspend.sh
+
+XF86PowerOff
+    suspend.sh
+
+XF86TouchpadToggle
+    touch_toggle
+
+# }}}
+

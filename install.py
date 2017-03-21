@@ -23,9 +23,10 @@ basic_dots = {
 
 config_dots = {
     'termite': ('termite', 'termiteconfig', 'config'),
-    'bspwm': ('bspwm', 'bspwmrc'),
-    'sxhkd': ('sxhkd', 'sxhkdrc')
+    'bspwm':   ('bspwm',   'bspwmrc'),
+    'sxhkd':   ('sxhkd',   'sxhkdrc')
 }
+
 
 def lnk(src, dst):
     if os.path.isfile(dst) or os.path.islink(dst):
@@ -84,8 +85,8 @@ if __name__ == '__main__':
         print 'Installing {}...'.format(dot)
         try:
             link_home(basic_dots[dot]) if dot in basic_dots else \
-            link_config(*config_dots[dot]) if dot in config_dots else \
-            globals()['setup_{}'.format(dot)]()
+                link_config(*config_dots[dot]) if dot in config_dots else \
+                globals()['setup_{}'.format(dot)]()
         except Exception as e:
             print 'Error installing {}:'.format(dot), e
 
