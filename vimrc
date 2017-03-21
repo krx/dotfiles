@@ -19,6 +19,7 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'yggdroot/indentline'
+Plug 'lilydjwg/colorizer'
 " }}}
 " Quick Nav {{{
 Plug 'scrooloose/nerdtree'

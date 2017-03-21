@@ -75,26 +75,43 @@ font-4 = UbuntuMono Nerd Font:pixelsize=24;5
 ; Seems to be the only one that correctly renders the corner triangles
 font-2 = HeavyData Nerd Font:pixelsize=15;3
 
-modules-left = bspwm xwindow
+modules-left = power bspwm xwindow
 modules-right = cpu memory battery date
 
 ;}}}
 ; Left {{{
+[module/power]
+type = custom/text
+
+content = "  "
+content-foreground = ${colors.dark0_soft}
+content-background = ${colors.light4}
+click-left = oblogout
+
+content-suffix = ${corners.tl}
+content-suffix-background = ${colors.dark0_soft}
+content-suffix-foreground = ${colors.light4}
 
 [module/bspwm]
 type = internal/bspwm
-format-suffix = ${corners.tl}
+
+format-prefix = " "
+format-prefix-background = ${colors.dark0_soft}
+
+format-suffix =" "
+;${corners.tl}
 format-suffix-background = ${colors.dark0_soft}
+format-suffix-foreground = ${colors.dark0_hard}
 
 label-focused = %index%
-label-focused-background = ${colors.light4}
-label-focused-foreground = ${colors.dark1}
-label-focused-underline= ${colors.neutral_orange}
+label-focused-background = ${colors.dark0_soft}
+label-focused-foreground = ${colors.light1}
+label-focused-underline= ${colors.neutral_blue}
 label-focused-padding = 1
 
 label-occupied = %index%
-label-occupied-background = ${colors.light4}
-label-occupied-foreground = ${colors.dark2}
+label-occupied-background = ${colors.dark0_soft}
+label-occupied-foreground = ${colors.light4}
 label-occupied-padding = 1
 
 label-urgent = %index%!
@@ -102,22 +119,14 @@ label-urgent-background = ${colors.bright_red}
 label-urgent-padding = 1
 
 label-empty = %index%
-label-empty-foreground = ${colors.dark4}
-label-empty-background = ${colors.light4}
+label-empty-foreground = ${colors.dark2}
+label-empty-background = ${colors.dark0_soft}
 label-empty-padding = 1
 
 [module/xwindow]
 type = internal/xwindow
-label-background = ${colors.dark0_soft}
-label-foreground = ${colors.light4}
 label = %title:0:50:...%
 label-padding = 1
-
-exec = bash -c "xtitle || echo 'ghost'"
-
-format-suffix = ${corners.tl}
-format-suffix-background = ${colors.dark0_hard}
-format-suffix-foreground = ${colors.dark0_soft}
 
 ; }}}
 ; Right {{{
