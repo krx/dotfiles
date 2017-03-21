@@ -321,41 +321,6 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.dark0_soft}
 
-
-;[module/spotifyctl]
-;type = custom/script
-;interval = 1
-
-;format-prefix = ${corners.br}
-;format-prefix-foreground = ${colors.dark0_soft}
-
-;format-suffix = ${corners.br}
-;format-suffix-background = ${colors.dark0_soft}
-
-;label = %output%
-;label-font = 5
-;label-padding = 1
-;label-background = ${colors.dark0_soft}
-;label-foreground = ${colors.light4}
-
-;exec = ~/.config/polybar/module_spotifyctl.py
-
-;[module/spotifyctl]
-;type = custom/ipc
-
-;format-prefix = ${corners.br}
-;format-prefix-background = ${colors.dark0_hard}
-;format-prefix-foreground = ${colors.dark0_soft}
-
-;format-suffix = ${corners.br}
-;format-suffix-background = ${colors.dark0_soft}
-;format-suffix-foreground = ${colors.light4}
-
-;hook-0 = ~/.config/polybar/module_spotifyctl.py %pid%
-;initial = 1
-
-
-
 ; }}}
 
 ; }}}
