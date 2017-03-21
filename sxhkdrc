@@ -26,8 +26,12 @@ alt + super + Escape
 	bspc quit
 
 alt + shift + r
+    $HOME/.config/polybar/launch.sh
+
+alt + ctrl + shift + r
     $HOME/.config/bspwm/bspwmrc
 
+alert
 # close and kill
 alt + shift + q
 	bspc node -c

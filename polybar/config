@@ -1,217 +1,159 @@
-;=====================================================
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/jaagr/polybar
-;
-;   The README contains alot of information
-;
-;=====================================================
-
 [colors]
-;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #ffb52a
+; Gruvbox color scheme {{{
+; probably (definitely) don't need all of these
+dark0_hard     = #1d2021
+dark0          = #282828
+dark0_soft     = #32302f
+dark1          = #3c3836
+dark2          = #504945
+dark3          = #665c54
+dark4          = #7c6f64
+dark4_256      = #7c6f64
+
+gray_245       = #928374
+gray_244       = #928374
+
+light0_hard    = #f9f5d7
+light0         = #fbf1c7
+light0_soft    = #f2e5bc
+light1         = #ebdbb2
+light2         = #d5c4a1
+light3         = #bdae93
+light4         = #a89984
+light4_256     = #a89984
+
+bright_red     = #fb4934
+bright_green   = #b8bb26
+bright_yellow  = #fabd2f
+bright_blue    = #83a598
+bright_purple  = #d3869b
+bright_aqua    = #8ec07c
+bright_orange  = #fe8019
+
+neutral_red    = #cc241d
+neutral_green  = #98971a
+neutral_yellow = #d79921
+neutral_blue   = #458588
+neutral_purple = #b16286
+neutral_aqua   = #689d6a
+neutral_orange = #d65d0e
+
+faded_red      = #9d0006
+faded_green    = #79740e
+faded_yellow   = #b57614
+faded_blue     = #076678
+faded_purple   = #8f3f71
+faded_aqua     = #427b58
+faded_orange   = #af3a03
+
+; }}}
+
+background = ${colors.dark0_hard}
+background-alt = ${colors.dark2}
+foreground = ${colors.light4}
+foreground-alt = ${colors.dark2}
 secondary = #e60053
-alert = #bd2c40
 
-[bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
+# Icons for the section separators
+[corners]
+tl = 
+tr = 
+bl = 
+br = 
+
+
+# Top Bar {{{
+[bar/top]
 width = 100%
-height = 27
-;offset-x = 1%
-;offset-y = 1%
-;radius = 6.0
+height = 20
 fixed-center = false
+wm-restack = bspwm
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+line-size = 2
 
-line-size = 3
-line-color = #f00
+background = ${colors.dark0_hard}
+foreground = ${colors.light4}
 
-border-size = 4
-border-color = #00000000
+; Text/icon fonts
+font-0 = Input Mono Narrow:pixelsize=10;2
+font-1 = FontAwesome:pixelsize=11;2
+font-3 = Material Icons:pixelsize=13;4
 
-padding-left = 0
-padding-right = 2
+; Seems to be the only one that correctly renders the corner triangles
+font-2 = HeavyData Nerd Font:pixelsize=15;3
 
-module-margin-left = 1
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-
-modules-left = bspwm
-;modules-center = mpd
-modules-right = filesystem volume memory cpu wlan eth battery temperature date powermenu
-
-tray-position = right
-tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
-
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
+modules-left = bspwm xwindow
+modules-right = cpu memory battery date
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label-background = ${colors.dark0_soft}
+label-foreground = ${colors.light4}
+label = %title:0:50:...%
+label-padding = 1
 
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
-
-label-layout = %layout%
-label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+format-suffix = ${corners.tl}
+format-suffix-background = ${colors.dark0_hard}
+format-suffix-foreground = ${colors.dark0_soft}
 
 [module/bspwm]
 type = internal/bspwm
+format-suffix = ${corners.tl}
+format-suffix-background = ${colors.dark0_soft}
 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-background = ${colors.light4}
+label-focused-foreground = ${colors.dark1}
+label-focused-underline= ${colors.neutral_orange}
+label-focused-padding = 1
 
 label-occupied = %index%
-label-occupied-padding = 2
+label-occupied-background = ${colors.light4}
+label-occupied-foreground = ${colors.dark2}
+label-occupied-padding = 1
 
 label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-background = ${colors.bright_red}
+label-urgent-padding = 1
 
 label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
+label-empty-foreground = ${colors.dark4}
+label-empty-background = ${colors.light4}
+label-empty-padding = 1
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
-label = %percentage%%
+interval = 0.5
+format = <label> <ramp-coreload>
+
+format-prefix = ${corners.tr}
+format-prefix-background = ${colors.dark0_hard}
+format-prefix-foreground = ${colors.dark0_soft}
+
+;label = " %{u#83a598} %percentage%%"
+label = "%{B#32302f}  %percentage%%"
+format-foreground = ${colors.light4}
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
-label = %percentage_used%%
 
-[module/wlan]
-type = internal/network
-interface = net1
-interval = 3.0
+format-background = ${colors.dark0_soft}
+format-foreground = ${colors.light4}
+format-prefix = " "
 
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
-label-connected = %essid%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
-
-[module/eth]
-type = internal/network
-interface = ens33
-interval = 3.0
-
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-[module/date]
-type = internal/date
-interval = 5
-
-date =
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
-label = %date% %time%
-
-[module/volume]
-type = internal/volume
-
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
-
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+format-padding = 2
+label =  %gb_used%
+;label-underline = ${colors.bright_green}
 
 [module/battery]
 type = internal/battery
@@ -219,73 +161,134 @@ battery = BAT0
 adapter = ACAD
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+;format-charging = <animation-charging> <label-charging>
+;format-charging-underline = #ffb52a
 
-format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+;format-discharging = <ramp-capacity> <label-discharging>
+;format-discharging-underline = ${colors.neutral_red}
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+;format-full-prefix = " "
+;format-full-prefix-foreground = ${colors.foreground-alt}
+;format-full-underline = ${colors.neutral_red}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+;ramp-capacity-0 = 
+;ramp-capacity-1 = 
+;ramp-capacity-2 = 
+;ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+;animation-charging-0 = 
+;animation-charging-1 = 
+;animation-charging-2 = 
+;animation-charging-foreground = ${colors.foreground-alt}
+;animation-charging-framerate = 750
 
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
+[module/date]
+type = internal/date
+interval = 5
 
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+date = "%a %d %b"
+time = "%I:%M %p"
 
-label = %temperature%
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
+format-background = ${colors.light4}
+label-foreground = ${colors.dark0_soft}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+format-prefix = ${corners.tr}
+format-prefix-background = ${colors.dark0_soft}
 
-[module/powermenu]
-type = custom/menu
+label = %date% | %time%
+label-padding = 1
+label-background = ${colors.light4}
 
-format-spacing = 1
+# }}}
+# Bottom bar {{{
+[bar/bot]
+width = 100%
+height = 20
+fixed-center = true
+bottom = true
+wm-restack = bspwm
 
-;label-open = 
-label-open = POW
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+background = ${colors.dark0_hard}
+foreground = ${colors.light4}
 
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
+font-0 = Input Mono Narrow:pixelsize=10;2
+font-1 = FontAwesome:pixelsize=11;2
+font-3 = Material Icons:pixelsize=13;4
 
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+; Seems to be the only one that correctly renders the corner triangles
+font-2 = HeavyData Nerd Font:pixelsize=15;3
 
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+modules-left = pkg
+modules-right = volume
+
+tray-position = left
+tray-background = ${colors.light4}
+tray-padding = 1
+
+
+[module/pkg]
+type = custom/script
+interval = 3600
+
+format-prefix = ${corners.bl}
+format-prefix-foreground = ${colors.light4}
+
+format = <label>
+format-background = ${colors.dark0_soft}
+label = " %output:0:30% "
+
+format-suffix = ${corners.bl}
+format-suffix-background = ${colors.dark0_hard}
+format-suffix-foreground = ${colors.dark0_soft}
+
+exec = .config/polybar/pkg.sh
+exec-if = "curl google.com > /dev/null"
+
+
+[module/volume]
+type = internal/volume
+
+format-volume = %{T4}<ramp-volume>%{T-} <bar-volume>
+format-volume-background = ${colors.light4}
+format-volume-foreground = ${colors.dark0_soft}
+format-volume-padding = 1
+
+format-muted-prefix = "%{T4}%{T-} "
+format-muted = <bar-volume>
+format-muted-background = ${colors.light4}
+format-muted-foreground = ${colors.dark0_soft}
+format-muted-padding = 1
+
+ramp-volume-font = 4
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+bar-volume-width = 15
+bar-volume-foreground-0 = ${colors.faded_aqua}
+bar-volume-foreground-1 = ${colors.faded_aqua}
+bar-volume-foreground-2 = ${colors.faded_aqua}
+bar-volume-foreground-3 = ${colors.faded_aqua}
+bar-volume-foreground-4 = ${colors.faded_aqua}
+bar-volume-foreground-5 = ${colors.neutral_orange}
+bar-volume-foreground-6 = ${colors.neutral_red}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = ${colors.dark0_hard}
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.dark0_soft}
+
+
+[module/spotify]
+type = custom/script
+
+
+
+# }}}
 
 [settings]
 screenchange-reload = true
@@ -293,9 +296,5 @@ screenchange-reload = true
 ;compositing-background = screen
 ;compositing-foreground = source
 ;compositing-border = over
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
 
 ; vim:ft=dosini
