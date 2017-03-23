@@ -27,8 +27,17 @@ bspc rule -a Oblogout state=fullscreen
 # }}}
 
 # (re)start sxhkd
-pgrep sxhkd && pkill -SIGUSR1 -x sxhkd || sxhkd &
+if pgrep sxhkd
+then
+    pkill -SIGUSR1 -x sxhkd
+else
+    sxhkd &
+    LOCK=1
+fi
 
 # Launch polybar
 ~/.config/polybar/launch.sh
+
+# Lock the screen if we just launched
+[[ $LOCK -eq 1 ]] && i3lock-krx
 
