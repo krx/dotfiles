@@ -58,6 +58,7 @@ nitrogen --restore &
 compton &
 volnoti -t 2 &
 xset s off -dpms
+nm-applet &
 
 # Start whichever DE I feel like using
 session=${1:-bspwm}
