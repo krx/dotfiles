@@ -61,9 +61,13 @@ alt + {_,shift + }{h,j,k,l}
 alt + {_,shift + }Tab
 	bspc node -f {next,prev}.local
 
-# focus or send to the given desktop
+# focus or send to the given desktop on the current monitor
 alt + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f,node -d} $(bspc query -M -m focused)/{1-9,10}
+
+# Select/send to the chosen monitor
+alt + ctrl + {_,shift +} {1-9,0}
+    bspc {monitor -f, node -m} '^{1-9,10}'
 
 # }}}
 # Resize/Move {{{

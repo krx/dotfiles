@@ -23,9 +23,14 @@ basic_dots = {
 
 config_dots = {
     'termite': ('termite', 'termiteconfig', 'config'),
-    'bspwm':   ('bspwm',   'bspwmrc'),
     'sxhkd':   ('sxhkd',   'sxhkdrc')
 }
+
+
+config_dirs = [
+    'polybar',
+    'bspwm'
+]
 
 
 def lnk(src, dst):
@@ -42,6 +47,10 @@ def link_config(cdir, src, dst=None):
     confdir = join(HOME, '.config', cdir)
     mkdir_p(confdir)
     lnk(join(DIR, src), join(confdir, dst or src))
+
+
+def link_config_dir(src):
+    lnk(join(DIR, src), join(HOME, '.config', src))
 
 
 def mkdir_p(path):
@@ -76,16 +85,13 @@ def setup_gdb():
     link_home('gdbinit')
 
 
-def setup_polybar():
-    lnk(join(DIR, 'polybar'), join(HOME, '.config', 'polybar'))
-
-
 if __name__ == '__main__':
     for dot in sys.argv[1:]:
         print 'Installing {}...'.format(dot)
         try:
             link_home(basic_dots[dot]) if dot in basic_dots else \
                 link_config(*config_dots[dot]) if dot in config_dots else \
+                link_config_dir(dot) if dot in config_dirs else \
                 globals()['setup_{}'.format(dot)]()
         except Exception as e:
             print 'Error installing {}:'.format(dot), e

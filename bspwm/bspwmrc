@@ -1,6 +1,9 @@
 #!/bin/sh
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+# Monitor config
+~/.config/bspwm/bspwm_monitors.sh &
+
+bspc config remove_unplugged_monitors true
 
 bspc config border_width	2
 bspc config window_gap      10
@@ -10,6 +13,7 @@ bspc config borderless_monocle  true
 bspc config gapless_monocle     true
 
 bspc config focus_follows_pointer true
+bspc config click_to_focus true
 bspc config pointer_modifier mod1
 
 # Colors {{{
@@ -26,5 +30,5 @@ bspc rule -a Oblogout state=fullscreen
 pgrep sxhkd && pkill -SIGUSR1 -x sxhkd || sxhkd &
 
 # Launch polybar
-$HOME/.config/polybar/launch.sh
+~/.config/polybar/launch.sh
 
