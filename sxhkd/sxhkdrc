@@ -9,30 +9,24 @@ alt + p
 # BSPWM {{{
 
 # Main controls {{{
+
 # Open new terminal
 alt + Return
     termite
-
-# Open a new manually placed terminal
-alt + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}; termite
-
-# Swap the current node and the biggest node
-alt + shift + Return
-	bspc node -s biggest.local
 
 # quit bspwm normally
 alt + super + Escape
 	bspc quit
 
+# Reload polybar
 alt + shift + r
     $HOME/.config/polybar/launch.sh
 
+# Reload bspwm config
 alt + ctrl + shift + r
     $HOME/.config/bspwm/bspwmrc
 
-alert
-# close and kill
+# Kill a node
 alt + q
 	bspc node -c
 
@@ -42,16 +36,24 @@ alt + q
 alt + m
 	bspc desktop -l next
 
-# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
-alt + y
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
-
 # set the window state
 alt + {t,shift + s,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
+# Mirror and flip leaves of tree
+alt + {comma,period}
+	bspc node '@/' -F {horizontal,vertical}
+
+# Rotate leaves of tree
+alt + shift + {comma,period}
+	bspc node '@/' -R {270, 90}
+
 # }}}
 # Focus/Swap/Send {{{
+
+# Swap the current node and the biggest node
+alt + shift + Return
+	bspc node -s biggest.local
 
 # focus the node in the given direction
 alt + {_,shift + }{h,j,k,l}
@@ -61,6 +63,14 @@ alt + {_,shift + }{h,j,k,l}
 alt + {_,shift + }Tab
 	bspc node -f {next,prev}.local
 
+# Preselect in direction
+alt + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# Move the current node into the preselection
+alt + ctrl + Return
+    bspc node -n 'last.!automatic.active'
+
 # focus or send to the given desktop on the current monitor
 alt + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} $(bspc query -M -m focused)/{1-9,10}
@@ -68,6 +78,7 @@ alt + {_,shift + }{1-9,0}
 # Select/send to the chosen monitor
 alt + ctrl + {_,shift +} {1-9,0}
     bspc {monitor -f, node -m} '^{1-9,10}'
+
 
 # }}}
 # Resize/Move {{{
@@ -91,13 +102,13 @@ alt + ctrl + {Left,Down,Up,Right}
 
 Print
     maim --hidecursor /tmp/screenshot.png; \
-    URL=$(imgurbash2 /tmp/screenshot.png | sed -E 's/ .+//g'); \
+    imgurbash2 /tmp/screenshot.png; \
     notify-send 'Screenshot uploaded'
 
 
 alt + Print
     maim --hidecursor -s /tmp/screenshot.png; \
-    URL=$(imgurbash2 /tmp/screenshot.png | sed -E 's/ .+//g'); \
+    imgurbash2 /tmp/screenshot.png;  \
     notify-send 'Screenshot uploaded'
 
 # }}}

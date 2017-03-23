@@ -39,6 +39,7 @@ Plug 'airblade/vim-gitgutter'
 " Langs {{{
 Plug 'neovimhaskell/haskell-vim'
 Plug 'smancill/conky-syntax.vim'
+Plug 'baskerville/vim-sxhkdrc'
 " }}}
 
 call plug#end()
