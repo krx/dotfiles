@@ -20,16 +20,11 @@ basic_dots = {
     'xbindkeys': 'xbindkeysrc'
 }
 
-
-config_dots = {
-    'termite': ('termite', 'termiteconfig', 'config'),
-    'sxhkd':   ('sxhkd',   'sxhkdrc')
-}
-
-
 config_dirs = [
     'polybar',
-    'bspwm'
+    'bspwm',
+    'sxhkd',
+    'termite'
 ]
 
 
@@ -41,12 +36,6 @@ def lnk(src, dst):
 
 def link_home(name):
     lnk(join(DIR, name), join(HOME, '.{}'.format(name)))
-
-
-def link_config(cdir, src, dst=None):
-    confdir = join(HOME, '.config', cdir)
-    mkdir_p(confdir)
-    lnk(join(DIR, src), join(confdir, dst or src))
 
 
 def link_config_dir(src):
@@ -90,7 +79,6 @@ if __name__ == '__main__':
         print 'Installing {}...'.format(dot)
         try:
             link_home(basic_dots[dot]) if dot in basic_dots else \
-                link_config(*config_dots[dot]) if dot in config_dots else \
                 link_config_dir(dot) if dot in config_dirs else \
                 globals()['setup_{}'.format(dot)]()
         except Exception as e:
