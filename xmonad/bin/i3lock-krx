@@ -1,24 +1,7 @@
 #!/usr/bin/env bash
-
-DIR=$(dirname "$0")
-LOCKPIC=$DIR/lock.png
-
-# Pause spotify
-dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
-
-# Grab screen info
-xdpyinfo -ext XINERAMA | sed '/^  head #/!d;s///' |
-while IFS=' :x@,' read i w h x y; do
-    maim --geometry=${w}x${h}+${x}+${y} /tmp/head_$i.png
-done
-
-# Pixelate screens and print the lock on them
-if [ -e /tmp/head_1.png ]; then
-    convert /tmp/head_0.png -scale 10% -scale 1000% $LOCKPIC -gravity center -composite '(' /tmp/head_1.png -scale 10% -scale 1000% $LOCKPIC -gravity center -composite ')' +append /tmp/screen.png
-else
-  convert /tmp/head_0.png -scale 10% -scale 1000% $LOCKPIC -gravity center -composite /tmp/screen.png
-fi
-
-# Lock
-i3lock  -e -i /tmp/screen.png
-rm -f /tmp/head*.png /tmp/screen.
+spotifyctl pause
+i3lock -ks --blur 1 --datestr="" --timestr="%I:%M %p" \
+    --textcolor=ebdbb2ff --insidecolor=32302fff \
+    --ringcolor=fe801988 --keyhlcolor=fe8019ff --bshlcolor=fb4934ff \
+    --insidevercolor=458588ff --ringvercolor=83a59888 \
+    --insidewrongcolor=9d0006ff --ringwrongcolor=fb493488

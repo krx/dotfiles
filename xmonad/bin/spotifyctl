@@ -26,6 +26,8 @@ opts = {
     'artist': lambda: get_metadata('artist'),
     'song':   lambda: get_metadata('title'),
     'toggle': lambda: send_action('PlayPause'),
+    'play': lambda: send_action('Play'),
+    'pause': lambda: send_action('Pause'),
     'next':   lambda: send_action('Next'),
     'prev':   lambda: send_action('Previous'),
 }
