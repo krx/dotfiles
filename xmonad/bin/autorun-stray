@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-# Start this after stalonetray was launched
-nm-applet &
-

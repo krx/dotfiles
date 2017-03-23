@@ -74,6 +74,10 @@ def setup_gdb():
     link_home('gdbinit')
 
 
+def setup_bin():
+    lnk(join(DIR, 'bin'), join(HOME, 'bin'))
+
+
 if __name__ == '__main__':
     for dot in sys.argv[1:]:
         print 'Installing {}...'.format(dot)

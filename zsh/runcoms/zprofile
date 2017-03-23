@@ -48,8 +48,7 @@ path=(
 )
 
 # Additional PATH defs
-export PATH="/home/krx/bin:/home/krx/.xmonad/bin:$PATH"
-export PATH="/home/krx/tools/ctf-tools/bin:$PATH"
+export PATH="/home/krx/bin:$PATH"
 export PATH="/home/krx/tools/JohnTheRipper/run:$PATH"
 
 # Fix awful ls color

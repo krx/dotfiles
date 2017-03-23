@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-i3lock-krx
-
-# Fixing this in a really hacky way, see dz_menu.py
-# nm-applet &
-
