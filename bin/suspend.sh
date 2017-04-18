@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-sudo systemctl stop NetworkManager.service
+#sudo systemctl stop NetworkManager.service
 i3lock-krx
-sudo pm-suspend
+systemctl suspend
+#sudo pm-suspend
 

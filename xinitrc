@@ -50,6 +50,7 @@ devmon &
 numlockx &
 
 # I like to disable the touchpad at startup
+touchpad.sh &
 touch_toggle &
 
 ~/.screenlayout/maindual.sh
@@ -59,6 +60,7 @@ compton &
 volnoti -t 2 &
 xset s off -dpms
 nm-applet &
+insync start &
 
 # Start whichever DE I feel like using
 session=${1:-bspwm}

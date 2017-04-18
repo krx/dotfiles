@@ -74,6 +74,12 @@ font-3 = Material Icons:pixelsize=13;4
 ; Seems to be the only one that correctly renders the corner triangles
 font-2 = HeavyData Nerd Font:pixelsize=15;4
 
+; Polybar crashes on some sites without these
+font-5 = Noto Sans Mono CJK JP:pixelsize=11;3
+font-6 = Noto Sans Mono CJK KR:pixelsize=11;3
+font-7 = Noto Sans Mono CJK SC:pixelsize=11;3
+font-8 = Noto Sans Mono CJK TC:pixelsize=11;3
+
 modules-left = power bspwm xwindow
 modules-right = cpu memory battery date
 
@@ -98,7 +104,6 @@ format-prefix = " "
 format-prefix-background = ${colors.dark0_soft}
 
 format-suffix =" "
-;${corners.tl}
 format-suffix-background = ${colors.dark0_soft}
 format-suffix-foreground = ${colors.dark0_hard}
 
@@ -113,7 +118,8 @@ label-occupied-background = ${colors.dark0_soft}
 label-occupied-foreground = ${colors.light4}
 label-occupied-padding = 1
 
-label-urgent = %index%!
+label-urgent = %index%
+label-urgent-foreground = ${colors.dark0_soft}
 label-urgent-background = ${colors.bright_red}
 label-urgent-padding = 1
 

@@ -33,7 +33,7 @@ alt + q
 # }}}
 # Layout controls {{{
 # alternate between the tiled and monocle layout
-alt + m
+alt + {m,button2}
 	bspc desktop -l next
 
 # set the window state
@@ -47,6 +47,10 @@ alt + {comma,period}
 # Rotate leaves of tree
 alt + shift + {comma,period}
 	bspc node '@/' -R {270, 90}
+
+# Equalize/balance nodes
+alt + {_,shift + } e
+    bspc node '@/' -{B,E}
 
 # }}}
 # Focus/Swap/Send {{{

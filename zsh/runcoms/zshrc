@@ -9,7 +9,7 @@ alias tmux='tmux -2'
 #alias pip='sudo pip'
 #alias gem='sudo gem'
 
-alias yaourt='yaourt --noconfirm'
+alias py='ipython2'
 
 # Ease of use for pacaur
 alias pac='pacaur'

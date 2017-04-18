@@ -30,6 +30,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'suan/vim-instant-markdown'
 " }}}
 " 'HUD' {{{
 Plug 'tpope/vim-fugitive'
@@ -37,7 +38,6 @@ Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 " }}}
 " Langs {{{
-Plug 'neovimhaskell/haskell-vim'
 Plug 'smancill/conky-syntax.vim'
 Plug 'baskerville/vim-sxhkdrc'
 " }}}
@@ -101,6 +101,10 @@ vnoremap <leader><Space> za
 " }}}
 " Misc keybindings {{{
 set pastetoggle=<F2>
+
+" Just mash it
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 " For moving over wrapped lines
 nnoremap j gj
@@ -330,10 +334,6 @@ endfunction
 " }}}
 " Misc plugin settings {{{
 let g:flake8_show_in_gutter=1
-syn match pythonBoolean "\(\W\|^\)\zsself\ze\."
-
-" haskell indenting
-let g:haskell_indent_disable = 1
 
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-d>'
