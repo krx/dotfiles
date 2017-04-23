@@ -1,9 +1,9 @@
 # Reload sxhkd config
-alt + Escape
+super + Escape
     pkill -USR1 -x sxhkd
 
 # Launcher
-alt + p
+super + p
     startrofi run
 
 # BSPWM {{{
@@ -11,76 +11,76 @@ alt + p
 # Main controls {{{
 
 # Open new terminal
-alt + Return
+super + Return
     termite
 
 # quit bspwm normally
-alt + super + Escape
+super + alt + Escape
 	bspc quit
 
 # Reload polybar
-alt + shift + r
+super + shift + r
     $HOME/.config/polybar/launch.sh
 
 # Reload bspwm config
-alt + ctrl + shift + r
+super + ctrl + shift + r
     $HOME/.config/bspwm/bspwmrc
 
 # Kill a node
-alt + q
+super + q
 	bspc node -c
 
 # }}}
 # Layout controls {{{
 # alternate between the tiled and monocle layout
-alt + {m,button2}
+super + {m,button2}
 	bspc desktop -l next
 
 # set the window state
-alt + {t,shift + s,s,f}
+super + {t,shift + s,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # Mirror and flip leaves of tree
-alt + {comma,period}
+super + {comma,period}
 	bspc node '@/' -F {horizontal,vertical}
 
 # Rotate leaves of tree
-alt + shift + {comma,period}
+super + shift + {comma,period}
 	bspc node '@/' -R {270, 90}
 
 # Equalize/balance nodes
-alt + {_,shift + } e
+super + {_,shift + } e
     bspc node '@/' -{B,E}
 
 # }}}
 # Focus/Swap/Send {{{
 
 # Swap the current node and the biggest node
-alt + shift + Return
+super + shift + Return
 	bspc node -s biggest.local
 
 # focus the node in the given direction
-alt + {_,shift + }{h,j,k,l}
+super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the next/previous node
-alt + {_,shift + }Tab
+super + {_,shift + }Tab
 	bspc node -f {next,prev}.local
 
 # Preselect in direction
-alt + ctrl + {h,j,k,l}
+super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # Move the current node into the preselection
-alt + ctrl + Return
+super + ctrl + Return
     bspc node -n 'last.!automatic.active'
 
 # focus or send to the given desktop on the current monitor
-alt + {_,shift + }{1-9,0}
+super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} $(bspc query -M -m focused)/{1-9,10}
 
 # Select/send to the chosen monitor
-alt + ctrl + {_,shift +} {1-9,0}
+super + ctrl + {_,shift +} {1-9,0}
     bspc {monitor -f, node -m} '^{1-9,10}'
 
 
@@ -88,15 +88,15 @@ alt + ctrl + {_,shift +} {1-9,0}
 # Resize/Move {{{
 
 # expand the tiled space in the given direction
-alt + {Left,Down,Up,Right}
+super + {Left,Down,Up,Right}
     bspc node {@west -r -30,@south -r +30,@north -r -30,@east -r +30}
 
 # contract the tiled space in the given direction
-alt + shift + {Left,Down,Up,Right}
+super + shift + {Left,Down,Up,Right}
 	bspc node {@east -r -30,@north -r +30,@south -r -30,@west -r +30}
 
 # move a floating window
-alt + ctrl + {Left,Down,Up,Right}
+super + ctrl + {Left,Down,Up,Right}
 	bspc node --move {-20 0,0 +20,0 -20,+20 0}
 
 # }}}
@@ -110,7 +110,7 @@ Print
     notify-send 'Screenshot uploaded'
 
 
-alt + Print
+super + Print
     maim --hidecursor -s /tmp/screenshot.png; \
     imgurbash2 /tmp/screenshot.png;  \
     notify-send 'Screenshot uploaded'
@@ -136,29 +136,30 @@ XF86MonBrightnessUp
 # }}}
 # Media controls {{{
 
-alt + bracketleft
+XF86AudioPrev
     spotifyctl prev
 
-alt + bracketright
+XF86AudioNext
     spotifyctl next
 
-Pause
+XF86AudioPlay
     spotifyctl toggle
 
 # }}}
 # Misc {{{
 
-super + l
+super + alt + l
     i3lock-krx
 
-XF86Sleep
-    suspend.sh
-
+#XF86Sleep
+#    suspend.sh
+#
 XF86PowerOff
-    suspend.sh
-
-XF86TouchpadToggle
-    touch_toggle
+    systemctl suspend
+#    suspend.sh
+#
+#XF86TouchpadToggle
+#    touch_toggle
 
 # }}}
 
