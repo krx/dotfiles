@@ -35,6 +35,7 @@ fi
 
 # I like to disable the touchpad at startup
 touchpad.sh &
+libinput-gestures &
 
 # Start up audio
 pulseaudio --start

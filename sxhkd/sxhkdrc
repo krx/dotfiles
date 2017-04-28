@@ -60,7 +60,7 @@ super + {_,shift + } e
 super + shift + Return
 	bspc node -s biggest.local
 
-# focus the node in the given direction
+# focus/swap the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
@@ -152,15 +152,11 @@ XF86AudioPlay
 super + alt + l
     i3lock-krx
 
-#XF86Sleep
-#    suspend.sh
-#
 XF86PowerOff
     systemctl suspend
-#    suspend.sh
-#
-#XF86TouchpadToggle
-#    touch_toggle
+
+super + F7
+    touch_toggle
 
 # }}}
 

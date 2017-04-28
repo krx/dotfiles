@@ -27,9 +27,7 @@ fi
 export LS_COLORS="$LS_COLORS:ow=30;42"
 
 # Laziness
-function mcd {
-    [[ -n "$1" ]] && mkdir -p "$1" && cd "$1"
-}
+alias mcd='mkdcd'
 
 # Stop breaking the terminal when i press C-s
 stty -ixon
