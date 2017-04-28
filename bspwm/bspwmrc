@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Reload the old state if it exists
+if [ -e "$BSPWM_STATE" ] ; then
+	bspc wm -l "$BSPWM_STATE"
+	rm "$BSPWM_STATE"
+fi
+
 # Monitor config
 ~/.config/bspwm/bspwm_monitors.sh &
 

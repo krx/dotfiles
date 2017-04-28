@@ -45,11 +45,13 @@ devmon &
 
 xsetroot -cursor_name left_ptr &
 compton &
+~/.fehbg &
 volnoti -t 2 &
 #xset s off -dpms
 nm-applet &
 blueman-applet &
 
+export BSPWM_STATE=/tmp/bspwm-state.json
 while true; do
     bspwm || break;
 done

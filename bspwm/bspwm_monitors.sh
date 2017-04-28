@@ -39,5 +39,8 @@ bspc subscribe monitor | while read line; do
         # Relaunch polybar
         ~/.config/polybar/launch.sh
     fi
+
+    # Either way, fix the wallpaper
+    $HOME/.fehbg &
 done
 

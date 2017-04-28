@@ -14,9 +14,10 @@ super + p
 super + Return
     termite
 
-# quit bspwm normally
-super + alt + Escape
-	bspc quit
+# refresh or quit bspwm
+super + alt + {_,shift + }Escape
+	{bspc wm -d > "$BSPWM_STATE" && bspc quit, \
+	 bspc quit}
 
 # Reload polybar
 super + shift + r
