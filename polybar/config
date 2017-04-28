@@ -217,11 +217,12 @@ animation-charging-foreground = ${colors.bright_green}
 
 
 [module/date]
-type = internal/date
+;type = internal/date
+type = custom/script
 interval = 5
 
-date = "%a %d %b"
-time = "%I:%M %p"
+;date = "%a %d %b"
+;time = "%I:%M %p"
 
 format-background = ${colors.light4}
 label-foreground = ${colors.dark0_soft}
@@ -229,9 +230,14 @@ label-foreground = ${colors.dark0_soft}
 format-prefix = ${corners.tr}
 format-prefix-background = ${colors.dark0_soft}
 
-label = %date% | %time%
+;label = %date% | %time%
+format = <label>
+label = %output%
 label-padding = 1
 label-background = ${colors.light4}
+
+exec = date +'%a %d %b | %I:%M %p'
+click-left = pkill gsimplecal; gsimplecal &
 
 ; }}}
 

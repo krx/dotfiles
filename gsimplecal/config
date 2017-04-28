@@ -1,0 +1,4 @@
+close_on_unfocus = 1
+mainwindow_yoffset = 20
+mainwindow_xoffset = -18
+mainwindow_keep_above = 1

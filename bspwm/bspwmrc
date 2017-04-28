@@ -32,7 +32,7 @@ bspc config focused_border_color '#a89984'
 bspc rule -r '*'
 bspc rule -a Oblogout state=fullscreen
 bspc rule -a "LibreOffice 5.3" state=tiled
-#bspc rule -a Steam follow=off
+bspc rule -a Gsimplecal border=off
 # }}}
 
 # (re)start sxhkd

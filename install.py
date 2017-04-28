@@ -25,7 +25,8 @@ config_dirs = [
     'bspwm',
     'sxhkd',
     'termite',
-    'rofi'
+    'rofi',
+    'gsimplecal',
 ]
 
 
