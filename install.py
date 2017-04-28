@@ -24,7 +24,8 @@ config_dirs = [
     'polybar',
     'bspwm',
     'sxhkd',
-    'termite'
+    'termite',
+    'rofi'
 ]
 
 
