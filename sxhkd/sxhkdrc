@@ -107,48 +107,22 @@ super + ctrl + {Left,Down,Up,Right}
 # }}}
 
 # }}}
-# Screenshots {{{
-
-Print
-    maim --hidecursor /tmp/screenshot.png; \
-    imgurbash2 /tmp/screenshot.png; \
-    notify-send 'Screenshot uploaded'
-
-
-super + Print
-    maim --hidecursor -s /tmp/screenshot.png; \
-    imgurbash2 /tmp/screenshot.png;  \
-    notify-send 'Screenshot uploaded'
-
-# }}}
 # Fn audio/display {{{
 
 XF86AudioMute
     volctl -t
 
-XF86AudioLowerVolume
-    volctl -d 2
+XF86Audio{LowerVolume,RaiseVolume}
+    volctl {-d,-i} 2
 
-XF86AudioRaiseVolume
-    volctl -i 2
-
-XF86MonBrightnessDown
-    brightctl -d 5
-
-XF86MonBrightnessUp
-    brightctl -i 5
+XF86MonBrightness{Down,Up}
+    brightctl {-d,-i} 5
 
 # }}}
 # Media controls {{{
 
-XF86AudioPrev
-    spotifyctl prev
-
-XF86AudioNext
-    spotifyctl next
-
-XF86AudioPlay
-    spotifyctl toggle
+XF86Audio{Prev,Next,Play}
+    spotifyctl {prev,next,toggle}
 
 # }}}
 # Misc {{{
@@ -161,6 +135,11 @@ XF86PowerOff
 
 super + F7
     touch_toggle
+
+{_,super + } Print
+    maim --hidecursor {_,-s} /tmp/screenshot.png; \
+    imgurbash2 /tmp/screenshot.png; \
+    notify-send 'Screenshot uploaded'
 
 # }}}
 
