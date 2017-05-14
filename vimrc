@@ -150,7 +150,6 @@ inoremap <F10> <Esc>:w<CR>:!clear; ./%<CR>
 nnoremap ; :
 vnoremap ; :
 
-
 " Keep selections when indenting
 vmap < <gv
 vmap > >gv
@@ -177,6 +176,10 @@ nnoremap <leader>,  :bprev<CR>
 " FZF "CtrlP"
 nnoremap <C-p> :execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<CR>
 nnoremap <C-t> :BTags<CR>
+
+" Better comment shortcut (ctrl-/)
+nnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
+vnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
 
 " Nice when running stuff
 "cnoremap ! !clear;<Space>
