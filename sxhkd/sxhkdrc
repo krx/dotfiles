@@ -72,13 +72,17 @@ super + {_,shift + }Tab
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
+# Cancel preselection
+super + {_,ctrl + } semicolon
+    bspc node -p cancel
+
 # Move the current node into the preselection
 super + ctrl + Return
     bspc node -n 'last.!automatic.active'
 
 # focus or send to the given desktop on the current monitor
 super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} $(bspc query -M -m focused)/{1-9,10}
+	bspc {desktop -f,node -d} $(bspc query -M -m focused)':^{1-9,10}'
 
 # Select/send to the chosen monitor
 super + ctrl + {_,shift +} {1-9,0}
