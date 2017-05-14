@@ -138,7 +138,7 @@ label-padding = 1
 
 [module/cpu]
 type = internal/cpu
-interval = 1
+interval = 2
 format = <label> <ramp-coreload>
 
 format-prefix = ${corners.tr}
@@ -300,8 +300,7 @@ format = <label>
 label = " %output:0:30% "
 label-background = ${colors.dark0_soft}
 
-exec = ~/.config/polybar/pkg.sh
-exec-if = "curl google.com > /dev/null"
+exec = ~/.config/polybar/pkg.py
 
 
 [module/volume]
