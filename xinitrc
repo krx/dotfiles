@@ -48,9 +48,12 @@ xsetroot -cursor_name left_ptr &
 compton &
 ~/.fehbg &
 volnoti -t 2 &
-#xset s off -dpms
+xset s off -dpms
 nm-applet &
 blueman-applet &
+
+# This should already be starting, but let's make sure
+insync start &
 
 export BSPWM_STATE=/tmp/bspwm-state.json
 while true; do
