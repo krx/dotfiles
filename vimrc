@@ -18,7 +18,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
-Plug 'yggdroot/indentline'
+Plug 'Yggdroot/indentLine'
 Plug 'lilydjwg/colorizer'
 " }}}
 " Quick Nav {{{
