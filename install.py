@@ -32,7 +32,8 @@ config_dirs = [
 
 def lnk(src, dst):
     if os.path.isfile(dst) or os.path.islink(dst):
-        raise Exception('File at \'{}\' already exists'.format(dst))
+        print('WARNING: File at \'{}\' already exists, ignoring...'.format(dst))
+        return
     sh.ln('-s', src, dst)
 
 
@@ -56,6 +57,9 @@ def setup_vim():
     mkdir_p(autoload)
     sh.curl('-fLo', join(autoload, 'plug.vim'), 'https://raw.github.com/junegunn/vim-plug/master/plug.vim')
     link_home('vimrc')
+
+    print '  Running PlugInstall'
+    sh.vim('+PlugInstall', '+qall')
 
 
 def setup_zsh():
