@@ -74,12 +74,6 @@ font-3 = Material Icons:pixelsize=13;4
 ; Seems to be the only one that correctly renders the corner triangles
 font-2 = HeavyData Nerd Font:pixelsize=15;4
 
-; Polybar crashes on some sites without these
-;font-5 = Noto Sans Mono CJK JP:pixelsize=11;3
-;font-6 = Noto Sans Mono CJK KR:pixelsize=11;3
-;font-7 = Noto Sans Mono CJK SC:pixelsize=11;3
-;font-8 = Noto Sans Mono CJK TC:pixelsize=11;3
-
 modules-left = power bspwm
 modules-right = cpu memory battery date
 
@@ -363,10 +357,10 @@ content = ${corners.br}
 
 [corners]
 ; Icons for the section separators
-tl = 
-tr = 
-bl = 
-br = 
+tl = %{T3}%{T-}
+tr = %{T3}%{T-}
+bl = %{T3}%{T-}
+br = %{T3}%{T-}
 
 
 [settings]
