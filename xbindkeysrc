@@ -1,0 +1,8 @@
+# thumb button => go back in history
+# We need a sleep here since the button triggers a few more key codes (wtf?).
+# It also triggers Control+Mod2+Control_L and Alt+Mod2+Alt_L. The sleep
+# prevents that X receives those keypresses simultaniously. Therefore they
+# might interfere and trigger unwanted actions. By the sleep we make sure that
+# the Alt+Left is receive as distinct event.
+"sleep 0.1 && bspc desktop -l next"
+   m:0xc + c:23

@@ -33,9 +33,8 @@ fi
 #vmware-user-suid-wrapper
 #sudo vmhgfs-fuse -o allow_other -o auto_unmount .host:/ /mnt/hgfs/
 
-# I like to disable the touchpad at startup
-touchpad.sh &
-libinput-gestures &
+~/bin/setup-xinput &
+xbindkeys &
 
 # Start up audio
 pulseaudio --start
