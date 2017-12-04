@@ -1,0 +1,55 @@
+#!/usr/bin/env python2
+from sh import scp, sha1sum, echo, xsel
+from os import path
+import argparse
+import sys
+
+USER = 'krx'
+HOST = 'krx.re'
+RPATH = '~/u'
+URL = path.split(RPATH)[-1]
+
+def upload(fname, rpath, user, host):
+    hsh = sha1sum(fname).stdout.split()[0]
+    _, ext = path.splitext(fname)
+    new_name = '{}{}'.format(hsh, ext)
+    url = 'https://' + '/'.join((host, URL, new_name))
+
+    scp(
+        fname,
+        '{}@{}:{}'.format(
+            user,
+            host,
+            path.join(rpath, new_name)
+        )
+    )
+
+    print url
+    xsel(echo('-n', url), '-b')
+
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('filename',
+                        help='Path to the file to upload')
+
+    parser.add_argument('-u', '--user',
+                        help='Username to use on the server',
+                        default=USER)
+
+    parser.add_argument('-s', '--server',
+                        help='Host to upload file to',
+                        default=HOST)
+
+    parser.add_argument('-p', '--path',
+                        help='Remote path to folder to upload the file to',
+                        default=RPATH)
+
+    args = parser.parse_args(sys.argv[1:])
+    upload(args.filename, args.path, args.user, args.server)
+    return 0
+
+
+if __name__ == '__main__':
+    exit(main())

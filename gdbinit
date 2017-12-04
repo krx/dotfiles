@@ -1,15 +1,16 @@
 # Source all settings from the peda dir
 source ~/tools/peda/peda.py
- 
+#source /usr/share/pwndbg/gdbinit.py
+
 # These are other settings I have found useful
- 
+
 # Intel syntax is more readable
 set disassembly-flavor intel
- 
+
 # When inspecting large portions of code the scrollbar works better than 'less'
 set pagination off
- 
- 
+
+
 # Keep a history of all the commands typed. Search is possible using ctrl-r
 set history save on
 set history filename ~/.gdb_history

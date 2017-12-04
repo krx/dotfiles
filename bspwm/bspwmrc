@@ -23,6 +23,9 @@ bspc config click_to_focus true
 #bspc config pointer_modifier mod1
 bspc config pointer_action2 none
 
+# Why is java trash?
+wmname LG3D
+
 # Colors {{{
 bspc config normal_border_color '#282828'
 bspc config active_border_color '#282828'

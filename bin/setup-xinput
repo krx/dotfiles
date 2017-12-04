@@ -6,7 +6,7 @@ TOUCHID=$(xinput list | egrep -iom1 'touchpad\s*id\=[0-9]{1,2}' | egrep -o '[0-9
 xinput set-prop $TOUCHID 'libinput Tapping Enabled' 1
 xinput set-prop $TOUCHID 'libinput Natural Scrolling Enabled' 1
 
-MX=$(xinput list | egrep -iom1 'MX Master\s*id\=[0-9]{1,2}' | egrep -o '[0-9]{1,2}')
+MX=$(xinput list | egrep -io 'MX Master\s*id\=[0-9]{1,2}' | tail -n1 | egrep -o '[0-9]{1,2}')
 xinput set-prop $MX 'libinput Accel Speed' -0.3
 
 libinput-gestures &

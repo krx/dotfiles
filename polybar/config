@@ -140,7 +140,7 @@ format-prefix-background = ${colors.dark0_hard}
 format-prefix-foreground = ${colors.dark0_soft}
 
 ;label = " %{u#83a598} %percentage%%"
-label = "%{B#32302f}  %percentage%%"
+label = "%{B#32302f}  %percentage:2%%"
 format-foreground = ${colors.light4}
 
 ramp-coreload-0 = ▁

@@ -30,16 +30,18 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'suan/vim-instant-markdown'
+"Plug 'suan/vim-instant-markdown'
 " }}}
 " 'HUD' {{{
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
+"Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-gitgutter'
 " }}}
 " Langs {{{
 Plug 'smancill/conky-syntax.vim'
 Plug 'baskerville/vim-sxhkdrc'
+Plug 'Glench/Vim-Jinja2-Syntax'
 " }}}
 
 call plug#end()
@@ -201,6 +203,9 @@ augroup Shebang
   autocmd BufNewFile *.rb 0put =\"#!/usr/bin/env ruby\<nl>\"|$
   autocmd BufNewFile *.sh 0put =\"#!/usr/bin/env bash\<nl>\"|$
 augroup END
+
+" Auto chmod +x files that are meant to be run
+au BufWritePost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent execute "!chmod +x <afile>" | endif | endif
 " }}}
 " Misc {{{
 set hidden
@@ -336,7 +341,13 @@ endfunction
 
 " }}}
 " Misc plugin settings {{{
-let g:flake8_show_in_gutter=1
+"let g:flake8_show_in_gutter=1
+
+" When reading a buffer (after 1s), and when writing.
+call neomake#configure#automake('rw', 1000)
+
+let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_python_pylint_exe = 'flake8-python2'
 
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-d>'

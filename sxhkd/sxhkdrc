@@ -4,7 +4,7 @@ super + Escape
 
 # Launcher
 super + p
-    rofi -show run
+    QT_AUTO_SCREEN_SCALE_FACTOR=0 rofi -show run
 
 # BSPWM {{{
 
@@ -138,7 +138,7 @@ super + F7
 
 {_,super + } Print
     maim --hidecursor {_,-s} /tmp/screenshot.png; \
-    imgurbash2 /tmp/screenshot.png; \
+    upload /tmp/screenshot.png; \
     notify-send 'Screenshot uploaded'
 
 # }}}

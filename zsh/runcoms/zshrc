@@ -6,6 +6,7 @@ fi
 setopt +C #Forgot what this is for, but pretty sure it's important
 
 alias tmux='tmux -2'
+alias vi='vim'
 #alias pip='sudo pip'
 #alias gem='sudo gem'
 
@@ -19,6 +20,8 @@ alias pacU='pac -Syu'  # Full upgrade
 alias pacX='pac -Rns'  # Remove package
 alias pacXO='pacX $(pac -Qtdq)'  # Remove orphan packages
 
+setopt prompt_cr prompt_sp
+
 if [[ "$COLORTERM" == "xfce4-terminal"  ]] ; then
   export TERM=xterm-256color
 fi
@@ -31,7 +34,6 @@ alias mcd='mkdcd'
 
 # Stop breaking the terminal when i press C-s
 stty -ixon
-
 
 PATH="/home/krx/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/krx/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
