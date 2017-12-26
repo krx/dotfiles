@@ -4,10 +4,33 @@ import argparse
 import re
 import sys
 import subprocess as sp
+import os
 
 base = 'dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 '
 metadata = base + "org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'{}'"
 action = base + 'org.mpris.MediaPlayer2.Player.{}'
+
+def fixenv():
+    # Repairs the environment vars so dbus works
+    try:
+        # Get spotify's pid
+        pid = sp.check_output([
+            'pgrep', '-o', '-u',
+            os.getenv('USER'),
+            'spotify'
+        ]).strip()
+
+        # Dump it's environment
+        with open('/proc/{}/environ'.format(pid)) as f:
+            env = f.read().strip('\x00').split('\x00')
+
+        # Find the dbus address and export that for us
+        dbus_key = 'DBUS_SESSION_BUS_ADDRESS'
+        dbus_val = next(v.split('=', 1)[1] for v in env if v.startswith(dbus_key))
+        os.putenv(dbus_key, dbus_val)
+    except sp.CalledProcessError:
+        # Spotify probably isn't running
+        pass
 
 def get_status():
     status = sp.check_output(metadata.format('PlaybackStatus'), shell=True)
@@ -36,5 +59,5 @@ parser = argparse.ArgumentParser()
 parser.add_argument('cmd', choices=opts.keys())
 args = parser.parse_args(sys.argv[1:])
 
+fixenv()
 opts[args.cmd]()
-
