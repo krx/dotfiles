@@ -12,13 +12,23 @@ alias vi='vim'
 
 alias py='ipython2'
 
-# Ease of use for pacaur
-alias pac='pacaur'
+# RIP PACAUR {{{
+## Ease of use for pacaur
+#alias pac='pacaur'
+#alias pacs='pac -Ss'   # Search
+#alias paci='pac -Sy'   # Install
+#alias pacU='pac -Syu'  # Full upgrade
+#alias pacX='pac -Rns'  # Remove package
+#alias pacXO='pacX $(pac -Qtdq)'  # Remove orphan packages
+# }}}
+
+# Ease of use for yay
+alias pac='yay'
 alias pacs='pac -Ss'   # Search
 alias paci='pac -Sy'   # Install
 alias pacU='pac -Syu'  # Full upgrade
 alias pacX='pac -Rns'  # Remove package
-alias pacXO='pacX $(pac -Qtdq)'  # Remove orphan packages
+alias pacXO='pac -Cd'  # Remove orphan packages
 
 setopt prompt_cr prompt_sp
 
@@ -32,11 +42,8 @@ export LS_COLORS="$LS_COLORS:ow=30;42"
 # Laziness
 alias mcd='mkdcd'
 
+# Source helper stuff
+source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/autosrc/*.zsh
+
 # Stop breaking the terminal when i press C-s
 stty -ixon
-
-PATH="/home/krx/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/krx/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/krx/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/krx/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/krx/perl5"; export PERL_MM_OPT;

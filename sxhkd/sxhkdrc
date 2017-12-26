@@ -138,7 +138,7 @@ super + F7
 
 {_,super + } Print
     maim --hidecursor {_,-s} /tmp/screenshot.png; \
-    upload /tmp/screenshot.png; \
+    upload -r /tmp/screenshot.png; \
     notify-send 'Screenshot uploaded'
 
 # }}}

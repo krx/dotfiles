@@ -9,12 +9,14 @@ HOST = 'krx.re'
 RPATH = '~/u'
 URL = path.split(RPATH)[-1]
 
-def upload(fname, rpath, user, host):
-    hsh = sha1sum(fname).stdout.split()[0]
-    _, ext = path.splitext(fname)
-    new_name = '{}{}'.format(hsh, ext)
-    url = 'https://' + '/'.join((host, URL, new_name))
+def upload(fname, rpath, user, host, rename):
+    new_name = path.basename(fname)
+    if rename:
+        hsh = sha1sum(fname).stdout.split()[0]
+        _, ext = path.splitext(fname)
+        new_name = '{}{}'.format(hsh, ext)
 
+    url = 'https://' + '/'.join((host, URL, new_name))
     scp(
         fname,
         '{}@{}:{}'.format(
@@ -46,8 +48,13 @@ def main():
                         help='Remote path to folder to upload the file to',
                         default=RPATH)
 
+    parser.add_argument('-r', '--rename',
+                        help="Renames the file to it's sha1",
+                        action='store_true',
+                        default=False)
+
     args = parser.parse_args(sys.argv[1:])
-    upload(args.filename, args.path, args.user, args.server)
+    upload(args.filename, args.path, args.user, args.server, args.rename)
     return 0
 
 
