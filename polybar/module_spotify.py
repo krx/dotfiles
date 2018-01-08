@@ -10,7 +10,7 @@ try:
 except:
     pass
 
-print '{}%{{F#b8bb26}}%{{F-}} %{{T1}}{} - {}'.format(
+print '{}%{{T6}}%{{F#b8bb26}}%{{F-}}%{{T-}} {} - {}'.format(
     '%{u#b8bb26}' if 'Playing' in status else  # Playing: green
     '%{u#fe8019}' if 'Paused' in status else   # Paused: orange
     '%{u#fb4934}',                             # Not running: red

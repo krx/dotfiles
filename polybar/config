@@ -68,11 +68,15 @@ foreground = ${colors.light4}
 
 ; Text/icon fonts
 font-0 = Input Mono Narrow:pixelsize=11;3
-font-1 = FontAwesome:pixelsize=11;2
-font-3 = Material Icons:pixelsize=13;4
-
 ; Seems to be the only one that correctly renders the corner triangles
-font-2 = HeavyData Nerd Font:pixelsize=15;4
+font-1 = HeavyData Nerd Font:pixelsize=15;4
+font-2 = Material Icons:pixelsize=13;4
+
+font-3 = Font Awesome 5 Free:style=Regular:pixelsize=11;2
+font-4 = Font Awesome 5 Free:style=Solid:pixelsize=11;2
+font-5 = Font Awesome 5 Brands:style=Regular:pixelsize=11;2
+
+
 
 modules-left = power bspwm
 modules-right = cpu memory battery date
@@ -162,7 +166,7 @@ format-foreground = ${colors.light4}
 format-prefix = " "
 
 format-padding = 2
-label =  %gb_used%
+label = %{T5}%{T-} %gb_used%
 ;label-underline = ${colors.bright_green}
 
 
@@ -291,7 +295,7 @@ format-suffix-background = ${colors.dark0_soft}
 format-suffix-foreground = ${colors.light4}
 
 format = <label>
-label = " %output:0:30% "
+label = " %output% "
 label-background = ${colors.dark0_soft}
 
 exec = ~/.config/polybar/pkg.py
@@ -300,18 +304,18 @@ exec = ~/.config/polybar/pkg.py
 [module/volume]
 type = internal/volume
 
-format-volume = %{T4}<ramp-volume>%{T-} <bar-volume>
+format-volume = %{T3}<ramp-volume>%{T-} <bar-volume>
 format-volume-background = ${colors.light4}
 format-volume-foreground = ${colors.dark0_soft}
 format-volume-padding = 1
 
-format-muted-prefix = "%{T4}%{T-} "
+format-muted-prefix = "%{T3}%{T-} "
 format-muted = <bar-volume>
 format-muted-background = ${colors.light4}
 format-muted-foreground = ${colors.dark0_soft}
 format-muted-padding = 1
 
-ramp-volume-font = 4
+ramp-volume-font = 3
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
@@ -326,12 +330,12 @@ bar-volume-foreground-5 = ${colors.neutral_orange}
 bar-volume-foreground-6 = ${colors.neutral_red}
 bar-volume-gradient = false
 bar-volume-indicator = |
-bar-volume-indicator-font = 2
+bar-volume-indicator-font = 1
 bar-volume-indicator-foreground = ${colors.dark0_hard}
 bar-volume-fill = ─
-bar-volume-fill-font = 2
+bar-volume-fill-font = 4
 bar-volume-empty = ─
-bar-volume-empty-font = 2
+bar-volume-empty-font = 4
 bar-volume-empty-foreground = ${colors.dark0_soft}
 
 ; }}}
@@ -357,10 +361,10 @@ content = ${corners.br}
 
 [corners]
 ; Icons for the section separators
-tl = %{T3}%{T-}
-tr = %{T3}%{T-}
-bl = %{T3}%{T-}
-br = %{T3}%{T-}
+tl = %{T2}%{T-}
+tr = %{T2}%{T-}
+bl = %{T2}%{T-}
+br = %{T2}%{T-}
 
 
 [settings]
