@@ -252,7 +252,7 @@ bottom = true
 
 modules-left = traysuffix
 modules-center = spotify
-modules-right = pkg volume
+modules-right = pkg alsa
 
 tray-position = left
 tray-background = ${colors.light4}
@@ -301,8 +301,8 @@ label-background = ${colors.dark0_soft}
 exec = ~/.config/polybar/pkg.py
 
 
-[module/volume]
-type = internal/volume
+[module/alsa]
+type = internal/alsa
 
 format-volume = %{T3}<ramp-volume>%{T-} <bar-volume>
 format-volume-background = ${colors.light4}
