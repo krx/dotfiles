@@ -8,7 +8,7 @@ def cnt(cmd):
     except:
         return 0
 
-print '{} %{{T5}}%{{F#b16286}}%{{F-}}%{{T-}} {}'.format(
+print '{} %{{T4}}%{{F#b16286}}%{{F-}}%{{T-}} {}'.format(
     cnt(sh.checkupdates),
     cnt(sh.cower.bake('-u'))
 )
