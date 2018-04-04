@@ -345,7 +345,7 @@ bottom = true
 
 modules-left =
 modules-center = spotify
-modules-right = volpre volume
+modules-right = volpre alsa
 
 [module/volpre]
 type=custom/text
