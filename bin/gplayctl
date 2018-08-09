@@ -1,0 +1,137 @@
+#!/usr/bin/env python2
+import argparse
+import json
+import os
+from os import path
+import sys
+import websocket  # python2-websocket-client
+
+"""
+#### SETUP ####
+
+When you first run a command that requires authentication
+ $ gplayctl {toggle,next,prev}
+you will be prompted on the cli to enter a 4-digit auth code from gpmdp
+
+Once authenticated, the auth key will be saved in ~/.gplayctl_auth
+"""
+
+# Auth stuff
+AUTH = path.join(os.getenv('HOME'), '.gplayctl_auth')
+auth_name = 'gplayctl'
+auth_key = None
+
+WS_HOST = 'localhost'
+WS_PORT = 5672
+
+# Websocket helpers {{{
+def connect():
+    return websocket.create_connection('ws://{}:{}'.format(WS_HOST, WS_PORT))
+
+def next_channel_data(ws, chan):
+    while True:
+        data = json.loads(ws.recv())
+        if data['channel'] == chan:
+            return data
+
+def get_channel(chan):
+    ws = connect()
+    data = next_channel_data(ws, chan)['payload']
+    ws.close()
+    return data
+
+# }}}
+
+# Auth {{{
+def setup_auth():
+    global auth_name, auth_key
+    ws = connect()
+
+    # Check for saved key and load it
+    if path.exists(AUTH):
+        with open(AUTH) as f:
+            data = json.load(f)
+            auth_name = data['name']
+            auth_key = data['key']
+
+        # Authenticate with gplay
+        ws.send(json.dumps({
+            'namespace': 'connect',
+            'method': 'connect',
+            'arguments': [auth_name, auth_key]
+        }))
+
+    # Generate a new key with the user
+    else:
+        # Initate key setup
+        ws.send(json.dumps({
+            'namespace': 'connect',
+            'method': 'connect',
+            'arguments': [auth_name]
+        }))
+
+        # Try to get the code from the user
+        data = next_channel_data(ws, 'connect')
+        while data['payload'] == 'CODE_REQUIRED':
+            code = raw_input('Enter code from gplay: ')[:4]
+            ws.send(json.dumps({
+                'namespace': 'connect',
+                'method': 'connect',
+                'arguments': [auth_name, code]
+            }))
+            data = next_channel_data(ws, 'connect')
+
+        # Save the key for later use
+        auth_key = data['payload']
+        with open(AUTH, 'w') as f:
+            json.dump({
+                'name': auth_name,
+                'key': auth_key
+            }, f)
+
+    return ws
+
+# }}}
+
+# Commands {{{
+def track_info():
+    return get_channel('track')
+
+def get_status():
+    try:
+        print 'Playing' if get_channel('playState') else 'Paused'
+    except:
+        print 'Stopped'
+
+def get_metadata(key):
+    print get_channel('track')[key]
+
+def send_action(a):
+    ws = setup_auth()
+    next_channel_data(ws, 'library') # Read all channels so far
+
+    # Send action request
+    ws.send(json.dumps({
+        'namespace': 'playback',
+        'method': a
+    }))
+
+    # Wait for response
+    print ws.recv()
+
+# }}}
+
+opts = {
+    'status': get_status,
+    'artist': lambda: get_metadata('artist'),
+    'song':   lambda: get_metadata('title'),
+    'toggle': lambda: send_action('playPause'),
+    'next':   lambda: send_action('forward'),
+    'prev':   lambda: send_action('rewind'),
+}
+
+parser = argparse.ArgumentParser()
+parser.add_argument('cmd', choices=opts.keys())
+args = parser.parse_args(sys.argv[1:])
+
+opts[args.cmd]()

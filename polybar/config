@@ -246,7 +246,7 @@ monitor = eDP-1
 bottom = true
 
 modules-left = traysuffix
-modules-center = spotify
+modules-center = gplay
 modules-right = pkg alsa
 
 tray-position = left
@@ -262,6 +262,18 @@ content = ${corners.bl}
 
 ; }}}
 ; Center {{{
+[module/gplay]
+type = custom/script
+interval = 1
+label = %output%
+label-foreground = ${colors.light4}
+exec = ~/.config/polybar/module_gplay.py
+
+; Jank controls
+click-left  = gplayctl toggle
+scroll-down = gplayctl prev
+scroll-up   = gplayctl next
+
 
 [module/spotify]
 type = custom/script
