@@ -246,7 +246,7 @@ monitor = eDP-1
 bottom = true
 
 modules-left = traysuffix
-modules-center = gplay
+modules-center = spotify
 modules-right = pkg alsa
 
 tray-position = left
