@@ -11,6 +11,7 @@ alias vi='vim'
 #alias gem='sudo gem'
 
 alias py='ipython2'
+alias py3='ipython'
 
 # RIP PACAUR {{{
 ## Ease of use for pacaur

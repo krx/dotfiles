@@ -6,3 +6,11 @@
 # the Alt+Left is receive as distinct event.
 "sleep 0.1 && bspc desktop -l next"
    m:0xc + c:23
+
+# backward button => previous song
+"xdotool key alt+Left"
+   b:8
+
+# forward button => next song
+"xdotool key alt+Right"
+   b:9

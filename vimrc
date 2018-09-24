@@ -10,8 +10,16 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Autocomplete {{{
-Plug 'Shougo/neocomplete.vim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+"Plug 'Shougo/deoplete.vim'
 Plug 'Shougo/echodoc.vim'
+Plug 'zchee/deoplete-jedi'
 "}}}
 " Pretty stuff {{{
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -294,49 +302,51 @@ au VimEnter * :RainbowParentheses
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
 " }}}
-" neocomplete {{{
+" deoplete {{{
 let g:echodoc_enable_at_startup = 1
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#auto_completion_start_length = 1
-let g:neocomplete#enable_auto_close_preview=1
+let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option('smart_case', v:true)
+"let g:deoplete#auto_completion_start_length = 1
+"let g:deoplete#enable_auto_close_preview=1
+autocmd CompleteDone * silent! pclose!
 
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+"" Plugin key-mappings.
+inoremap <expr><C-g>     deoplete#undo_completion()
+inoremap <expr><C-l>     deoplete#complete_common_string()
 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
   return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
-" This is actually C-Space
-inoremap <expr><NUL>  pumvisible() ? "\<C-n>" : neocomplete#start_manual_complete()
+"" This is actually C-Space
+inoremap <expr><NUL>  pumvisible() ? "\<C-n>" : deoplete#manual_complete()
 
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"" Enable omni completion.
+"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
+"" Enable heavy omni completion.
+"if !exists('g:deoplete#sources#omni#input_patterns')
+  "let g:deoplete#sources#omni#input_patterns = {}
+"endif
 
-" Fixes for neocomplete + multiple_cursors {{{
-function! Multiple_cursors_before()
-    exe 'NeoCompleteLock'
-    echo 'Disabled autocomplete'
-endfunction
+" Fixes for deoplete + multiple_cursors {{{
+"function! Multiple_cursors_before()
+    "exe 'NeoCompleteLock'
+    "echo 'Disabled autocomplete'
+"endfunction
 
-function! Multiple_cursors_after()
-    exe 'NeoCompleteUnlock'
-    echo 'Enabled autocomplete'
-endfunction
+"function! Multiple_cursors_after()
+    "exe 'NeoCompleteUnlock'
+    "echo 'Enabled autocomplete'
+"endfunction
 " }}}
 
 " }}}
