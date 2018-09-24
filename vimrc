@@ -20,6 +20,7 @@ endif
 "Plug 'Shougo/deoplete.vim'
 Plug 'Shougo/echodoc.vim'
 Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-clang'
 "}}}
 " Pretty stuff {{{
 Plug 'junegunn/rainbow_parentheses.vim'
