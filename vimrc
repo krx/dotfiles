@@ -48,6 +48,7 @@ Plug 'neomake/neomake'
 Plug 'airblade/vim-gitgutter'
 " }}}
 " Langs {{{
+Plug 'vim-python/python-syntax'
 Plug 'smancill/conky-syntax.vim'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -352,13 +353,46 @@ inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
 
 " }}}
 " Misc plugin settings {{{
-"let g:flake8_show_in_gutter=1
 
+" NeoMake {{{
 " When reading a buffer (after 1s), and when writing.
 call neomake#configure#automake('rw', 1000)
 
 let g:neomake_python_enabled_makers = ['flake8']
-let g:neomake_python_pylint_exe = 'flake8-python2'
+let g:neomake_python_pylint_exe = 'flake8'
+"
+" Get a list with executable and args for a buffer.
+" a:0: bufnr, defaults to current.
+" Returns an empty list if not shebang was found.
+function! Get_exe_args_from_shebang(...) abort
+    let bufnr = a:0 ? +a:1 : bufnr('%')
+    let line1 = get(getbufline(bufnr, 1), 0)
+    if line1[0:1] ==# '#!'
+        let shebang = substitute(line1[2:], '\v^\s+|\s+$', '', '')
+        return split(shebang)
+    endif
+    return []
+endfunction
+
+ " Helper (dict) function to set exe/args for a maker, based on the job
+" buffer's shebang.
+" Can be uses as a setting, e.g.:
+" call neomake#config#set('b:python.InitForJob', function('Set_argv_from_shebang'))
+function! Set_argv_from_shebang(jobinfo) dict abort
+    let bufnr = get(a:jobinfo, 'bufnr', '')
+    if bufnr isnot# ''
+        let exe_args = Get_exe_args_from_shebang(bufnr)
+        if !empty(exe_args)
+            call neomake#log#debug(printf('python: using %s for shebang.', string(exe_args)))
+
+            let self.exe = exe_args[0]
+            let self.args = exe_args[1:] + ['-m', g:neomake_python_pylint_exe] + self.args
+        endif
+    endif
+endfunction
+
+call neomake#config#set('ft.python.InitForJob', function('Set_argv_from_shebang'))
+" }}}
 
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-d>'
@@ -366,4 +400,5 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+let g:python_highlight_all = 1
 " }}}
