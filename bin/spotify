@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-dbus-launch /usr/bin/spotify
+/usr/bin/spotify
+#dbus-launch /usr/bin/spotify

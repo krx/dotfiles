@@ -36,7 +36,8 @@ zstyle ':prezto:load' pmodule \
   'syntax-highlighting' \
   'history-substring-search' \
   'command-not-found' \
-  'prompt'
+  'prompt' \
+  'pass-zsh-completion'
 
 #
 # Editor

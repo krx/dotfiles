@@ -81,7 +81,7 @@ modules-right = cpu memory battery date
 [module/power]
 type = custom/text
 
-content = "  "
+content = "  "
 content-foreground = ${colors.dark0_soft}
 content-background = ${colors.light4}
 click-left = oblogout
@@ -283,6 +283,7 @@ label-foreground = ${colors.light4}
 exec = ~/.config/polybar/module_spotify.py
 
 ; Jank controls
+click-right = wmctrl -a Spotify
 click-left  = spotifyctl toggle
 scroll-down = spotifyctl prev
 scroll-up   = spotifyctl next
@@ -305,7 +306,7 @@ format = <label>
 label = " %output% "
 label-background = ${colors.dark0_soft}
 
-exec = ~/.config/polybar/pkg.py
+exec = ~/.config/polybar/pkg_debian.sh
 
 
 [module/alsa]

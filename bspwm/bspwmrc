@@ -6,6 +6,9 @@ if [ -e "$BSPWM_STATE" ] ; then
 	rm "$BSPWM_STATE"
 fi
 
+# Setup desktop
+~/.config/bspwm/bspwm_init.sh
+
 # Monitor config
 ~/.config/bspwm/bspwm_monitors.sh &
 

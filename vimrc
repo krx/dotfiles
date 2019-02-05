@@ -33,6 +33,7 @@ Plug 'lilydjwg/colorizer'
 " Quick Nav {{{
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 " }}}
 " Code Helpers {{{

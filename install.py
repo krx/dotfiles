@@ -67,7 +67,7 @@ def setup_zsh():
     prezto = join(HOME, '.zprezto')
     if not os.path.isdir(prezto):
         sh.git('clone', '--recursive', 'https://github.com/sorin-ionescu/prezto.git', prezto)
-        sh.zsh('-c', 'setopt EXTENDED_GLOB; for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done')
+        sh.zsh('-c', 'setopt EXTENDED_GLOB; for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do ln -sf "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done')
 
     lnk(join(DIR, 'zsh', 'prompt_krx_setup'), join(prezto, 'modules', 'prompt', 'functions'))
     shutil.rmtree(join(prezto, 'runcoms'))
