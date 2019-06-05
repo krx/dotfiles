@@ -49,7 +49,7 @@ source ${ZDOTDIR:-$HOME}/.zprezto/runcoms/autosrc/*.zsh
 stty -ixon
 
 # Setup anaconda
-source /home/krx/tools/anaconda3/etc/profile.d/conda.sh
+#source /home/krx/tools/anaconda3/etc/profile.d/conda.sh
 
 # Setup virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs

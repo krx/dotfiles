@@ -53,6 +53,7 @@ Plug 'vim-python/python-syntax'
 Plug 'smancill/conky-syntax.vim'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'keith/swift.vim'
 " }}}
 
 call plug#end()
