@@ -189,6 +189,7 @@ nnoremap <leader>,  :bprev<CR>
 " FZF "CtrlP"
 nnoremap <C-p> :execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'<CR>
 nnoremap <C-t> :BTags<CR>
+nnoremap <C-]> :Ag<CR>
 
 " Better comment shortcut (ctrl-/)
 nnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
@@ -402,4 +403,5 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 let g:python_highlight_all = 1
+let g:better_whitespace_guicolor='#3C3836'
 " }}}
