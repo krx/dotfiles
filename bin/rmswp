@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+from pathlib import Path
+from argparse import ArgumentParser
+import sys
+
+parser = ArgumentParser()
+parser.add_argument('-r', '--recursive', action='store_true',
+                    help='Delete .swp files recursively')
+parser.add_argument('--dry-run', action='store_true',
+                    help='Show which files would be deleted without doing anything')
+args = parser.parse_args(sys.argv[1:])
+
+files = list(Path('.').glob('./**/.*.swp' if args.recursive else './.*.swp'))
+if len(files) > 0:
+    if args.dry_run:
+        print(f'Files to be removed: {files}')
+    else:
+        print(f'Removing files: {files}')
+        [f.unlink() for f in files]
+else:
+    print('Nothing to remove')
