@@ -54,6 +54,7 @@ Plug 'smancill/conky-syntax.vim'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'keith/swift.vim'
+Plug 'pangloss/vim-javascript'
 " }}}
 
 call plug#end()
@@ -405,4 +406,5 @@ let g:multi_cursor_quit_key='<Esc>'
 
 let g:python_highlight_all = 1
 let g:better_whitespace_guicolor='#3C3836'
+let g:strip_whitespace_confirm = 0
 " }}}
