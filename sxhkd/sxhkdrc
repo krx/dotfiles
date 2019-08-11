@@ -88,10 +88,9 @@ super + ctrl + Return
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} $(bspc query -M -m focused)':^{1-9,10}'
 
-# Select/send to the chosen monitor
+# Select/send root to the chosen monitor
 super + ctrl + {_,shift +} {1-9,0}
-    bspc {monitor -f, node -m} '^{1-9,10}'
-
+    bspc {monitor -f, node "@$(bspc query -D -d focused):/" -m} '^{1-9,10}'
 
 # }}}
 # Resize/Move {{{
