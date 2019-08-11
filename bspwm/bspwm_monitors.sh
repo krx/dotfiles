@@ -5,17 +5,30 @@ function setup_monitor() {
 }
 
 function delete_monitor() {
-    # Choose the first unoccupied desktop to throw all nodes in
-    # If all are occupied, and the old desktop is moved over
-    DESKS=($(bspc query -D -d '.!occupied' -m primary)) && TO=${DESKS[0]}
+    # Gather all unoccupied desktops on the primary monitor
+    PRIMARY=$(bspc query -M -m primary)
+    DSK_TO=($(bspc query -D -d '.!occupied' --names | grep "$PRIMARY"))
+
+    # Count how many desktops need to be moved, compute total # desktops needed
+    DSK_FROM=($(bspc query -D --names -d '.occupied' | grep "$1"))
+    TOTAL=$(( 10 - ${#DSK_TO[@]} + ${#DSK_FROM[@]} ))
+
+    # Add additional desktops to the primary monitor as needed
+    for i in $(seq 11 ${TOTAL}); do
+        bspc monitor $PRIMARY -a $PRIMARY/$i
+        DSK_TO+=("$PRIMARY/$i")
+    done
 
     # Move nodes from all occupied desktops getting deleted
-    for i in {1..10}; do
+    for i in $(seq 0 $((${#DSK_FROM[@]} - 1))); do
         # Move the root node of the deleted desktop to the new desktop
-        NODES=($(bspc query -N -d $1/$i)) && bspc node ${NODES[0]} -d $TO
+        NODES=($(bspc query -N -d ${DSK_FROM[$i]}))
+        bspc node ${NODES[0]} -d ${DSK_TO[$i]}
+    done
 
-        # Delete the desktop
-        bspc desktop $1/$i -r
+    # Delete the old desktops
+    for i in {1..10}; do
+        bspc desktop "$1/$i" -r
     done
 }
 
@@ -43,4 +56,3 @@ bspc subscribe monitor | while read line; do
     # Either way, fix the wallpaper
     $HOME/.fehbg &
 done
-
