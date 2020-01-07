@@ -30,3 +30,5 @@ rofi.font: Input Mono Bold 16
 rofi.matching: fuzzy
 rofi.lines: 8
 rofi.separator-style: none
+
+rofi.modi: run,window,kill:~/.config/rofi/rofi_kill.sh

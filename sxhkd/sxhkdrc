@@ -6,6 +6,14 @@ super + Escape
 super + p
     QT_AUTO_SCREEN_SCALE_FACTOR=0 rofi -show run
 
+# Killer
+super + alt + k
+    rofi -show kill
+
+# Windows focus
+super + w
+    rofi -show window
+
 # BSPWM {{{
 
 # Main controls {{{
