@@ -1,12 +1,13 @@
 [user]
-	name = Kareem El-Faramawi
+	name = Kareem ElFaramawi
 	email = kareem02@gmail.com
 [credential]
 	helper = store
 [filter "lfs"]
 	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge --skip -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [core]
 	editor = vim
 [rebase]

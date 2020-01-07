@@ -1,6 +1,6 @@
 # Source all settings from the peda dir
 #source ~/tools/peda/peda.py
-source ~/tools/pwndbg/gdbinit.py
+#source ~/tools/pwndbg/gdbinit.py
 
 # These are other settings I have found useful
 
@@ -17,3 +17,4 @@ set history filename ~/.gdb_history
 set history size 32768
 set history expansion on
 
+source /home/krx/.gdbinit-gef.py
