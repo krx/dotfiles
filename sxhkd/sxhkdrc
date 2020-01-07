@@ -139,7 +139,7 @@ XF86Audio{Prev,Next,Play}
 # Misc {{{
 
 super + alt + l
-    i3lock-krx
+    i3lock-krx -q
 
 XF86PowerOff
     systemctl suspend
