@@ -82,7 +82,7 @@ super + {_,ctrl + } semicolon
 
 # Move the current node into the preselection
 super + ctrl + Return
-    bspc node -n 'last.!automatic.active'
+    bspc node -n 'last.!automatic'
 
 # focus or send to the given desktop on the current monitor
 super + {_,shift + }{1-9,0}
