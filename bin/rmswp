@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
 from argparse import ArgumentParser
+from pprint import pformat
 import sys
 
 parser = ArgumentParser()
@@ -13,9 +14,9 @@ args = parser.parse_args(sys.argv[1:])
 files = list(Path('.').glob('./**/.*.swp' if args.recursive else './.*.swp'))
 if len(files) > 0:
     if args.dry_run:
-        print(f'Files to be removed: {files}')
+        print(f'Files to be removed:\n{pformat(files)}')
     else:
-        print(f'Removing files: {files}')
+        print(f'Removing files:\n{pformat(files)}')
         [f.unlink() for f in files]
 else:
     print('Nothing to remove')
