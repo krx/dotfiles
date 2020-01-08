@@ -10,10 +10,7 @@ MD=${2}
 DS=${5:-1}
 
 # Throw all the root nodes to the new desktops
-# I'm *sure* there's a much better way to do this
 for i in $(seq "$3" "$4"); do
-    bspc desktop -f "^${MD}:^${DS}"
-    bspc desktop -f "^${MS}:^${i}"
-    bspc node "@$(bspc query -D -d focused):/" -m "^${MD}"
+    bspc node "@^${MS}:^${i}:/" -d "^${MD}:^${DS}"
     DS=$((DS + 1))
 done
