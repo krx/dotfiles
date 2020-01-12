@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 spotifyctl pause
-[ "$1" == "-q" ] || no_radio=1
-if [[ $no_radio -eq 1 ]]; then nmcli radio wifi off; fi
+#[ "$1" == "-q" ] || no_radio=1
+#if [[ $no_radio -eq 1 ]]; then nmcli radio wifi off; fi
 i3lock -nkes --blur 1 --indicator --show-failed-attempts \
     --datestr="" --timestr="%I:%M %p" --timecolor=ebdbb2ff \
     --verifcolor=ebdbb2ff --wrongcolor=ebdbb2ff --insidecolor=32302fff \
     --ringcolor=fe801988 --keyhlcolor=fe8019ff --bshlcolor=fb4934ff \
     --insidevercolor=458588ff --ringvercolor=83a59888 \
     --insidewrongcolor=9d0006ff --ringwrongcolor=fb493488
-if [[ $no_radio -eq 1 ]]; then nmcli radio wifi on; fi
+#if [[ $no_radio -eq 1 ]]; then nmcli radio wifi on; fi
