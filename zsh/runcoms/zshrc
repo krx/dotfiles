@@ -55,5 +55,3 @@ stty -ixon
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
-
-PATH=$PATH:/opt/010editor;export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - 87FF8EFC-483D-BCAA-D67D-735CF60410D1 CF3C680F-38F9-47AC-70EA-1B0683C78500
