@@ -1,48 +1,61 @@
-#!/usr/bin/env python2
-
+#!/usr/bin/env python3
 import argparse
-import re
 import sys
-import subprocess as sp
-import os
+import dbus
 
-base = 'dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 '
-metadata = base + "org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'{}'"
-action = base + 'org.mpris.MediaPlayer2.Player.{}'
+BUS_INFO   = ('org.mpris.MediaPlayer2.spotify', '/org/mpris/MediaPlayer2')
+PROPS_IFC  = 'org.freedesktop.DBus.Properties'
+ACTION_IFC = 'org.mpris.MediaPlayer2.Player'
 
-def fixenv():
-    # Repairs the environment vars so dbus works
+
+# let's hope I never need this again {{{
+# def fixenv():
+    # # Repairs the environment vars so dbus works
+    # try:
+        # # Get spotify's pid
+        # pid = sp.check_output([
+            # 'pgrep', '-o', '-u',
+            # os.getenv('USER'),
+            # 'spotify'
+        # ]).strip()
+
+        # # Dump it's environment
+        # with open('/proc/{}/environ'.format(pid)) as f:
+            # env = f.read().strip('\x00').split('\x00')
+
+        # # Find the dbus address and export that for us
+        # dbus_key = 'DBUS_SESSION_BUS_ADDRESS'
+        # dbus_val = next(v.split('=', 1)[1] for v in env if v.startswith(dbus_key))
+        # os.putenv(dbus_key, dbus_val)
+    # except sp.CalledProcessError:
+        # # Spotify probably isn't running
+        # pass
+# }}}
+
+
+def connect(ifc):
     try:
-        # Get spotify's pid
-        pid = sp.check_output([
-            'pgrep', '-o', '-u',
-            os.getenv('USER'),
-            'spotify'
-        ]).strip()
+        bus = dbus.SessionBus()
+        proxy = bus.get_object(*BUS_INFO)
+        return dbus.Interface(proxy, ifc)
+    except dbus.exceptions.DBusException:
+        print('OFFLINE')
+        exit(1)
 
-        # Dump it's environment
-        with open('/proc/{}/environ'.format(pid)) as f:
-            env = f.read().strip('\x00').split('\x00')
-
-        # Find the dbus address and export that for us
-        dbus_key = 'DBUS_SESSION_BUS_ADDRESS'
-        dbus_val = next(v.split('=', 1)[1] for v in env if v.startswith(dbus_key))
-        os.putenv(dbus_key, dbus_val)
-    except sp.CalledProcessError:
-        # Spotify probably isn't running
-        pass
 
 def get_status():
-    status = sp.check_output(metadata.format('PlaybackStatus'), shell=True)
-    print re.search(r'string "([^"]+)"', status).group(1)
+    print(connect(PROPS_IFC).Get(ACTION_IFC, 'PlaybackStatus'))
+
 
 def get_metadata(key):
-    data = sp.check_output(metadata.format('Metadata'), shell=True)
-    print re.search(r'string "([^"]+)"', data.split(key)[1]).group(1)
+    md = connect(PROPS_IFC).Get(ACTION_IFC, 'Metadata')
+    val = md.get(f'xesam:{key}')
+    print(val[0] if isinstance(val, dbus.Array) else val)
+
 
 def send_action(a):
-    print action.format(a)
-    sp.call(action.format(a), shell=True)
+    getattr(connect(ACTION_IFC), a)()
+
 
 opts = {
     'status': get_status,
