@@ -24,4 +24,4 @@ blueman-applet &
 # This should already be starting, but let's make sure
 insync start &
 
-sudo tzupdate
+sudo tzupdate &

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-spotifyctl pause
+#spotifyctl pause
 #[ "$1" == "-q" ] || no_radio=1
 #if [[ $no_radio -eq 1 ]]; then nmcli radio wifi off; fi
 i3lock -nkes --blur 1 --indicator --show-failed-attempts \
