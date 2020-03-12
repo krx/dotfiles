@@ -1,18 +1,18 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import sh
 
 song = artist = status = ''
 try:
-    song   = sh.spotifyctl('song').stdout.strip()
-    artist = sh.spotifyctl('artist').stdout.strip()
-    status = sh.spotifyctl('status').stdout.strip()
+    song   = sh.spotifyctl('song').stdout.strip().decode()
+    artist = sh.spotifyctl('artist').stdout.strip().decode()
+    status = sh.spotifyctl('status').stdout.strip().decode()
 except:
     pass
 
-print u'{}%{{T4}}%{{F#b8bb26}}\uf1bc%{{F-}}%{{T-}} {} - {}'.format(
-    '%{u#b8bb26}' if 'Playing' in status else  # Playing: green
-    '%{u#fe8019}' if 'Paused' in status else   # Paused: orange
-    '%{u#fb4934}',                             # Not running: red
-    artist.decode('utf-8'),
-    song.decode('utf-8')
-).encode('utf-8')
+col = (
+    '#b8bb26' if 'Playing' in status else  # Playing: green
+    '#fe8019' if 'Paused' in status else   # Paused: orange
+    '#fb4934'                              # Not running: red
+)
+
+print(f'%{{u{col}}}%{{T4}}%{{F#b8bb26}}\uf1bc%{{F-}}%{{T-}} {artist} - {song}')
