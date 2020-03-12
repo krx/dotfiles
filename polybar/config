@@ -162,7 +162,7 @@ format-foreground = ${colors.light4}
 format-prefix = " "
 
 format-padding = 2
-label = %{T4}%{T-} %gb_used%
+label = %{T4}%{T-} %gb_used%/%gb_swap_used%
 ;label-underline = ${colors.bright_green}
 
 
