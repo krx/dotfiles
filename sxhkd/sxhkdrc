@@ -63,8 +63,10 @@ super + {_,shift + } e
 
 # Toggle gaps
 super + {_,shift +} g
-    {bspc config border_width 2; bspc config window_gap 15, \
-     bspc config border_width 0; bspc config window_gap 0}
+    {bspc config normal_border_color '#282828'; bspc config active_border_color '#282828'; \
+     bspc config border_width 2; bspc config window_gap 15, \
+     bspc config normal_border_color '#504945'; bspc config active_border_color '#504945'; \
+     bspc config border_width 1; bspc config window_gap 0}
 # }}}
 # Focus/Swap/Send {{{
 
