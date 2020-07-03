@@ -2,35 +2,44 @@
 import argparse
 import sys
 import dbus
+import json
+import time
+from oauthlib.oauth2 import BackendApplicationClient
+from requests.auth import HTTPBasicAuth
+from requests_oauthlib import OAuth2Session
+from pathlib import Path
+
+HOME_CONF = Path.home()/'.spotifyctl'
+TRACK_CACHE = Path('/tmp/spotifyctl.json')
 
 BUS_INFO   = ('org.mpris.MediaPlayer2.spotify', '/org/mpris/MediaPlayer2')
 PROPS_IFC  = 'org.freedesktop.DBus.Properties'
 ACTION_IFC = 'org.mpris.MediaPlayer2.Player'
 
+'''
+Spotify broke their own dbus interface on linux (again), so now we
+have to use their REST API to get track info. The track ID still
+shows up on dbus when playing on a _different_ device, but nothing
+else does.
 
-# let's hope I never need this again {{{
-# def fixenv():
-    # # Repairs the environment vars so dbus works
-    # try:
-        # # Get spotify's pid
-        # pid = sp.check_output([
-            # 'pgrep', '-o', '-u',
-            # os.getenv('USER'),
-            # 'spotify'
-        # ]).strip()
+NOTE:
+- If track info is locally available (seems to only happen when playing on this device)
+  that gets used, no requests are made
+- this will ONLY request track info when the cached track id changes
+    (grabs new info when the song changes and saves it)
+- if the cached access token is not valid, a new one is requested
 
-        # # Dump it's environment
-        # with open('/proc/{}/environ'.format(pid)) as f:
-            # env = f.read().strip('\x00').split('\x00')
-
-        # # Find the dbus address and export that for us
-        # dbus_key = 'DBUS_SESSION_BUS_ADDRESS'
-        # dbus_val = next(v.split('=', 1)[1] for v in env if v.startswith(dbus_key))
-        # os.putenv(dbus_key, dbus_val)
-    # except sp.CalledProcessError:
-        # # Spotify probably isn't running
-        # pass
-# }}}
+Some additional setup is needed now for this to work:
+1. Go to https://developer.spotify.com/dashboard/
+2. Create a new app with no additional permissions
+3. On the dashboard page for that app, copy the client ID and secret
+4. Either:
+    - Create the file `~/.spotifyctl` containing:
+        {"id": "<client-id>", "secret": "<client-secret>"}
+    - Run a command that requires an API call, you will be prompted
+      for the ID and secret
+        $ spotifyctl {song,artist,album}
+'''
 
 
 def connect(ifc):
@@ -47,30 +56,103 @@ def get_status():
     print(connect(PROPS_IFC).Get(ACTION_IFC, 'PlaybackStatus'))
 
 
+def _cached_track(tid):
+    if TRACK_CACHE.exists():
+        try:
+            with open(TRACK_CACHE) as f:
+                return json.load(f)
+        except json.decoder.JSONDecodeError:
+            # No idea how this is happening
+            # for now just return the empty tid and re-query
+            pass
+    return {'tid': ''}
+
+
+def _get_client_info():
+    if HOME_CONF.exists():
+        with open(HOME_CONF) as f:
+            return json.load(f)
+
+    # Get new id/secret
+    print('No client ID/secret found')
+    print('Create a new app at https://developer.spotify.com/dashboard/\n')
+
+    client = {
+        'id': input('Enter client ID: ').strip(),
+        'secret': input('Enter client secret: ').strip()
+    }
+
+    with open(HOME_CONF, 'w') as f:
+        json.dump(client, f)
+    return client
+
+
+def _get_track(tid, track, client):
+    if 'oauth' not in track or time.time() > track['oauth_exp']:
+        # Request a new access token
+        spot = OAuth2Session(client=BackendApplicationClient(client_id=client['id']))
+        oauth = spot.fetch_token('https://accounts.spotify.com/api/token',
+                                 auth=HTTPBasicAuth(client['id'], client['secret']))
+        track['oauth'] = oauth['access_token']
+        track['oauth_exp'] = oauth['expires_at']
+    else:
+        # Token is still valid
+        spot = OAuth2Session(token={'access_token': track['oauth']})
+
+    tinfo = spot.get(f'https://api.spotify.com/v1/tracks/{tid.split(":")[-1]}').json()
+
+    track['artist'] = ', '.join(artist['name'] for artist in tinfo['artists'])
+    track['album'] = tinfo['album']['name']
+    track['title'] = tinfo['name']
+    track['tid'] = tid
+
+    return track
+
+
 def get_metadata(key):
+    client = _get_client_info()
     md = connect(PROPS_IFC).Get(ACTION_IFC, 'Metadata')
+
+    # Try grabbing offline data first
     val = md.get(f'xesam:{key}')
-    print(val[0] if isinstance(val, dbus.Array) else val)
+    val = ', '.join(val) if isinstance(val, dbus.Array) else val
+    if val != '':
+        print(val)
+        return
+
+    # Offline data not available, request track info
+    tid = md.get('mpris:trackid')
+    track = _cached_track(tid)
+
+    if tid != track['tid']:
+        # Song changed, request new track info
+        track = _get_track(tid, track, client)
+        with open(TRACK_CACHE, 'w') as f:
+            f.truncate()  # This shouldn't be needed, but why are there extra curlys sometimes?
+            json.dump(track, f)
+
+    print(track[key])
 
 
 def send_action(a):
     getattr(connect(ACTION_IFC), a)()
 
 
-opts = {
-    'status': get_status,
-    'artist': lambda: get_metadata('artist'),
-    'song':   lambda: get_metadata('title'),
-    'toggle': lambda: send_action('PlayPause'),
-    'play':   lambda: send_action('Play'),
-    'pause':  lambda: send_action('Pause'),
-    'next':   lambda: send_action('Next'),
-    'prev':   lambda: send_action('Previous'),
-}
+if __name__ == '__main__':
+    opts = {
+        'status': get_status,
+        'artist': lambda: get_metadata('artist'),
+        'song':   lambda: get_metadata('title'),
+        'album':  lambda: get_metadata('album'),
+        'toggle': lambda: send_action('PlayPause'),
+        'play':   lambda: send_action('Play'),
+        'pause':  lambda: send_action('Pause'),
+        'next':   lambda: send_action('Next'),
+        'prev':   lambda: send_action('Previous'),
+    }
 
-parser = argparse.ArgumentParser()
-parser.add_argument('cmd', choices=opts.keys())
-args = parser.parse_args(sys.argv[1:])
+    parser = argparse.ArgumentParser()
+    parser.add_argument('cmd', choices=opts.keys())
+    args = parser.parse_args(sys.argv[1:])
 
-# fixenv()
-opts[args.cmd]()
+    opts[args.cmd]()
