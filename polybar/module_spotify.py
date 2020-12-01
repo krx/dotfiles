@@ -3,6 +3,7 @@ import sh
 
 song = artist = status = ''
 try:
+    sh.pgrep('spotify')
     song   = sh.spotifyctl('song').stdout.strip().decode()
     artist = sh.spotifyctl('artist').stdout.strip().decode()
     status = sh.spotifyctl('status').stdout.strip().decode()

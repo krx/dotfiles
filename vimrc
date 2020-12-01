@@ -213,7 +213,7 @@ autocmd FileType help wincmd L
 
 " Auto-shebang
 augroup Shebang
-  autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python2\<nl>\"|$
+  autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python3\<nl>\"|$
   autocmd BufNewFile *.rb 0put =\"#!/usr/bin/env ruby\<nl>\"|$
   autocmd BufNewFile *.sh 0put =\"#!/usr/bin/env bash\<nl>\"|$
 augroup END
