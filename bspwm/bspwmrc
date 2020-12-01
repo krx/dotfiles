@@ -39,7 +39,7 @@ bspc rule -r '*'
 bspc rule -a Oblogout state=fullscreen
 bspc rule -a "LibreOffice 5.3" state=tiled
 bspc rule -a Gsimplecal border=off
-bspc rule -a "F5 VPN" hidden=on
+#bspc rule -a "F5 VPN" hidden=on
 # }}}
 
 # (re)start sxhkd

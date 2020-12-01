@@ -54,5 +54,7 @@ bspc subscribe monitor | while read line; do
     fi
 
     # Either way, fix the wallpaper
-    $HOME/.fehbg &
+    if [[ ${ev[0]} != "monitor_focus" ]]; then
+        $HOME/.fehbg &
+    fi
 done
