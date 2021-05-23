@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import os
 import sh
 import sys
@@ -60,7 +60,7 @@ def setup_vim():
     sh.curl('-fLo', join(autoload, 'plug.vim'), 'https://raw.github.com/junegunn/vim-plug/master/plug.vim')
     link_home('vimrc')
 
-    print '  Running PlugInstall'
+    print('  Running PlugInstall')
     sh.vim('+PlugInstall', '+qall')
 
 
@@ -88,11 +88,11 @@ def setup_bin():
 
 if __name__ == '__main__':
     for dot in sys.argv[1:]:
-        print 'Installing {}...'.format(dot)
+        print('Installing {}...'.format(dot))
         try:
             link_home(basic_dots[dot]) if dot in basic_dots else \
                 link_config_dir(dot) if dot in config_dirs else \
                 globals()['setup_{}'.format(dot)]()
         except Exception as e:
-            print 'Error installing {}:'.format(dot), e
+            print('Error installing {}:'.format(dot), e)
 
