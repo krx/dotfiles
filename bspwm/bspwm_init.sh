@@ -3,7 +3,7 @@
 source ~/.zprofile
 export PATH
 
-~/bin/setup-xinput &
+#~/bin/setup-xinput &
 xbindkeys &
 
 # Start up audio
@@ -16,17 +16,17 @@ xbindkeys &
 #/usr/bin/gnome-screensaver &
 
 # Start up automounting
-devmon &
+#devmon &
 
 xsetroot -cursor_name left_ptr &
-compton &
+#compton &
 ~/.fehbg &
-volnoti -t 2 &
-xset s off -dpms
+#volnoti -t 2 &
+#xset s off -dpms
 nm-applet &
 blueman-applet &
 
 # This should already be starting, but let's make sure
 insync start &
 
-sudo tzupdate &
+#sudo tzupdate &

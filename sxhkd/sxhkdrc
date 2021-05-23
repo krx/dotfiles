@@ -122,14 +122,14 @@ super + ctrl + {Left,Down,Up,Right}
 # }}}
 # Fn audio/display {{{
 
-XF86AudioMute
-    volctl -t
-
-XF86Audio{LowerVolume,RaiseVolume}
-    volctl {-d,-i} 2
-
-XF86MonBrightness{Down,Up}
-    brightctl {-d,-i} 5
+# XF86AudioMute
+#     volctl -t
+#
+# XF86Audio{LowerVolume,RaiseVolume}
+#     volctl {-d,-i} 2
+#
+# XF86MonBrightness{Down,Up}
+#     brightctl {-d,-i} 5
 
 # }}}
 # Media controls {{{
@@ -143,8 +143,8 @@ XF86Audio{Prev,Next,Play}
 super + alt + l
     i3lock-krx
 
-XF86PowerOff
-    systemctl suspend
+/*XF86PowerOff*/
+    /*systemctl suspend*/
 
 super + F7
     touch_toggle
