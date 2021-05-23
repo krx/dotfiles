@@ -41,6 +41,8 @@ Some additional setup is needed now for this to work:
         $ spotifyctl {song,artist,album}
 '''
 
+WEB = False
+
 
 def connect(ifc):
     try:
@@ -116,7 +118,7 @@ def get_metadata(key):
     # Try grabbing offline data first
     val = md.get(f'xesam:{key}')
     val = ', '.join(val) if isinstance(val, dbus.Array) else val
-    if val != '':
+    if val != '' and not WEB:
         print(val)
         return
 
@@ -138,7 +140,9 @@ def send_action(a):
     getattr(connect(ACTION_IFC), a)()
 
 
-if __name__ == '__main__':
+def main():
+    global WEB
+
     opts = {
         'status': get_status,
         'artist': lambda: get_metadata('artist'),
@@ -153,6 +157,12 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('cmd', choices=opts.keys())
+    parser.add_argument('-f', '--force-web', action='store_true')
     args = parser.parse_args(sys.argv[1:])
 
+    WEB = args.force_web
     opts[args.cmd]()
+
+
+if __name__ == '__main__':
+    exit(main())
