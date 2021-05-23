@@ -55,3 +55,5 @@ stty -ixon
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
