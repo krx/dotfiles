@@ -10,6 +10,11 @@ xbindkeys &
 #pulseaudio --start
 #amixer -c PCH cset 'name=Headphone Mic Boost Volume' 1 &
 
+# get GNOME stuff working
+/usr/libexec/gsd-xsettings &
+/usr/bin/gnome-flashback &
+#/usr/bin/gnome-screensaver &
+
 # Start up automounting
 devmon &
 
