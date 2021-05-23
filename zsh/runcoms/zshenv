@@ -9,6 +9,6 @@
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-export SWIFTENV_ROOT="$HOME/.swiftenv"
-export PATH="$SWIFTENV_ROOT/bin:$PATH"
-eval "$(swiftenv init -)"
+#export SWIFTENV_ROOT="$HOME/.swiftenv"
+#export PATH="$SWIFTENV_ROOT/bin:$PATH"
+#eval "$(swiftenv init -)"

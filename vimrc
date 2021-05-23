@@ -197,6 +197,14 @@ nnoremap <C-]> :Ag<CR>
 nnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
 vnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
 
+" Disable pageup/down (thanks Dell)
+nnoremap <PageUp> <Nop>
+nnoremap <PageDown> <Nop>
+vnoremap <PageUp> <Nop>
+vnoremap <PageDown> <Nop>
+inoremap <PageUp> <Nop>
+inoremap <PageDown> <Nop>
+
 " Nice when running stuff
 "cnoremap ! !clear;<Space>
 
@@ -373,6 +381,7 @@ function! Get_exe_args_from_shebang(...) abort
     let line1 = get(getbufline(bufnr, 1), 0)
     if line1[0:1] ==# '#!'
         let shebang = substitute(line1[2:], '\v^\s+|\s+$', '', '')
+        let shebang = substitute(shebang, '\vsudo\s+', '', '')
         return split(shebang)
     endif
     return []

@@ -3,8 +3,8 @@ super + Escape
     pkill -USR1 -x sxhkd
 
 # Launcher
-super + p
-    QT_AUTO_SCREEN_SCALE_FACTOR=0 rofi -show run
+super + {shift + p,p}
+    QT_AUTO_SCREEN_SCALE_FACTOR=0 rofi -show {drun,run}
 
 # Killer
 super + alt + k

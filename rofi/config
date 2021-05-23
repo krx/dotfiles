@@ -26,9 +26,10 @@ rofi.bw: 0
 rofi.hide-scrollbar: true
 !rofi.padding: 400
 !rofi.fullscreen: true
-rofi.font: Input Mono Bold 16
+rofi.font: Input Mono Bold 22
 rofi.matching: fuzzy
 rofi.lines: 8
 rofi.separator-style: none
+rofi.show-icons: true
 
-rofi.modi: run,window,kill:~/.config/rofi/rofi_kill.sh
+rofi.modi: run,window,kill:~/.config/rofi/rofi_kill.sh,drun
