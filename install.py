@@ -27,7 +27,8 @@ config_dirs = [
     'termite',
     'rofi',
     'gsimplecal',
-    'libinput-gestures.conf'
+    'libinput-gestures.conf',
+    'autostart'
 ]
 
 
