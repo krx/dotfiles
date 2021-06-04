@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+PATH='org.gnome.desktop.peripherals.touchpad'
+KEY='send-events'
+
+case "$(/sbin/gsettings get $PATH $KEY)" in
+    "'enabled'") TOGGLE=disabled ;;
+    *) TOGGLE=enabled ;;
+esac
+
+/sbin/gsettings set "$PATH" "$KEY" "$TOGGLE"
+/sbin/notify-send 'Touchpad' "${TOGGLE^}" -i /usr/share/icons/Numix/64/devices/input-touchpad.svg -t 3000
