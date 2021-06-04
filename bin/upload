@@ -1,39 +1,34 @@
-#!/usr/bin/env python2
-from sh import scp, sha1sum, echo, xsel
-from os import path
+#!/usr/bin/env python3
+from pathlib import Path
+from hashlib import sha1
 import argparse
+import subprocess as sp
 import sys
 
 USER = 'krx'
 HOST = 'krx.re'
-RPATH = '~/u'
-URL = path.split(RPATH)[-1]
+RPATH = Path('~/u')
+URL = RPATH.relative_to(RPATH.parts[0])
 
-def upload(fname, rpath, user, host, rename):
-    new_name = path.basename(fname)
+
+def upload(fname: Path, user: str, host: str, rename: bool):
+    new_name = fname.name
     if rename:
-        hsh = sha1sum(fname).stdout.split()[0]
-        _, ext = path.splitext(fname)
-        new_name = '{}{}'.format(hsh, ext)
+        hsh = sha1(fname.read_bytes()).hexdigest()
+        new_name = f'{hsh}{fname.suffix}'
 
-    url = 'https://' + '/'.join((host, URL, new_name))
-    scp(
-        fname,
-        '{}@{}:{}'.format(
-            user,
-            host,
-            path.join(rpath, new_name)
-        )
-    )
+    url = f'https://{host}/{URL}/{new_name}'
+    sp.check_call(['scp', fname, f'{user}@{host}:{RPATH / new_name}'])
 
-    print url
-    xsel(echo('-n', url), '-b')
+    print(url)
+    sp.call(f'echo -n "{url}" | xsel -b', shell=True)
 
 
 def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('filename',
+                        type=Path,
                         help='Path to the file to upload')
 
     parser.add_argument('-u', '--user',
@@ -44,18 +39,18 @@ def main():
                         help='Host to upload file to',
                         default=HOST)
 
-    parser.add_argument('-p', '--path',
-                        help='Remote path to folder to upload the file to',
-                        default=RPATH)
-
     parser.add_argument('-r', '--rename',
-                        help="Renames the file to it's sha1",
+                        help="Renames the file to its sha1",
                         action='store_true',
                         default=False)
 
     args = parser.parse_args(sys.argv[1:])
-    upload(args.filename, args.path, args.user, args.server, args.rename)
-    return 0
+
+    if not args.filename.exists():
+        print('Input file does not exist!')
+        return 1
+
+    upload(args.filename, args.user, args.server, args.rename)
 
 
 if __name__ == '__main__':
