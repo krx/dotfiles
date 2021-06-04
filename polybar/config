@@ -74,7 +74,7 @@ font-0 = Input Mono Narrow:pixelsize=22;5
 font-1 = HeavyData Nerd Font:pixelsize=28;6
 font-2 = Material Icons:pixelsize=28;10
 font-3 = HeavyData Nerd Font:pixelsize=22;6
-font-4 = VL Gothic:pixelsize=11;2
+font-4 = VL Gothic:pixelsize=22;2
 
 modules-left = power bspwm
 modules-right = cpu memory battery date
