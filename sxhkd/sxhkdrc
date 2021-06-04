@@ -80,7 +80,7 @@ super + {_,shift + }{h,j,k,l}
 
 # focus the next/previous node
 super + {_,shift + }Tab
-	bspc node -f {next,prev}.local
+	bspc node -f {next,prev}.leaf.local
 
 # Preselect in direction
 super + ctrl + {h,j,k,l}
@@ -120,18 +120,6 @@ super + ctrl + {Left,Down,Up,Right}
 # }}}
 
 # }}}
-# Fn audio/display {{{
-
-XF86AudioMute
-    volctl -t
-
-XF86Audio{LowerVolume,RaiseVolume}
-    volctl {-d,-i} 2
-
-XF86MonBrightness{Down,Up}
-    brightctl {-d,-i} 5
-
-# }}}
 # Media controls {{{
 
 XF86Audio{Prev,Next,Play}
@@ -147,7 +135,7 @@ XF86PowerOff
     systemctl suspend
 
 super + F7
-    touch_toggle
+    touch_toggle_gnome
 
 {_,super + } Print
     maim --hidecursor {_,-s} /tmp/screenshot.png; \
