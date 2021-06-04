@@ -213,9 +213,6 @@ inoremap <PageDown> <Nop>
 " Strip trailing whitespace
 autocmd BufEnter * EnableStripWhitespaceOnSave
 
-" Save on losing focus
-au FocusLost * <Esc>:wa
-
 " Show help in a vertical split
 autocmd FileType help wincmd L
 
