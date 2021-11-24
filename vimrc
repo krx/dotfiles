@@ -194,8 +194,8 @@ nnoremap <C-t> :BTags<CR>
 nnoremap <C-]> :Ag<CR>
 
 " Better comment shortcut (ctrl-/)
-nnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
-vnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
+nnoremap <C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
+vnoremap <C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
 
 " Disable pageup/down (thanks Dell)
 nnoremap <PageUp> <Nop>

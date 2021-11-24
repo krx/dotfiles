@@ -16,4 +16,4 @@ col = (
     '#fb4934'                              # Not running: red
 )
 
-print(f'%{{u{col}}}%{{T4}}%{{F#b8bb26}}\uf1bc%{{F-}}%{{T-}} {artist} - {song}')
+print(f'%{{u{col}}}%{{+u}}%{{T4}}%{{F#b8bb26}}\uf1bc%{{F-}}%{{T-}} {artist} - {song}')

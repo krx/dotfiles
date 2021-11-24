@@ -55,7 +55,7 @@ faded_orange   = #af3a03
 ; Config {{{
 
 [bar/top]
-monitor = ${env:MONITOR:eDP-1}
+monitor = ${env:MONITOR:eDP1}
 width = 100%
 height = 20
 fixed-center = true
@@ -82,10 +82,10 @@ modules-right = cpu memory battery date
 [module/power]
 type = custom/text
 
-content = "  "
+content = "  "
 content-foreground = ${colors.dark0_soft}
 content-background = ${colors.light4}
-click-left = oblogout
+click-left = gnome-control-center
 
 content-suffix = ${corners.tl}
 content-suffix-background = ${colors.dark0_soft}
@@ -243,7 +243,7 @@ click-left = pkill gsimplecal; gsimplecal &
 [bar/bot]
 inherit = bar/top
 ; Extra things to display only on the laptop screen
-monitor = eDP-1
+monitor = eDP1
 bottom = true
 
 modules-left = traysuffix
@@ -307,7 +307,7 @@ format = <label>
 label = " %output% "
 label-background = ${colors.dark0_soft}
 
-exec = ~/.config/polybar/pkg_debian.sh
+exec = ~/.config/polybar/pkg.py
 
 
 [module/alsa]
@@ -354,7 +354,7 @@ bar-volume-empty-foreground = ${colors.dark0_soft}
 
 [bar/extbot]
 inherit = bar/top
-monitor = ${env:MONITOR:HDMI-1-3}
+monitor = ${env:MONITOR:DP1}
 bottom = true
 
 modules-left =

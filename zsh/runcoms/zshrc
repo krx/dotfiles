@@ -6,7 +6,8 @@ fi
 setopt +C #Forgot what this is for, but pretty sure it's important
 
 alias tmux='tmux -2'
-alias vi='vim'
+alias vi='nvim'
+alias vim='nvim'
 #alias pip='sudo pip'
 #alias gem='sudo gem'
 
@@ -32,7 +33,11 @@ alias pacXO='pac -Cd'  # Remove orphan packages
 
 alias ag='ag --unrestricted --search-binary'
 
+alias 7z-ultra='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
+
 setopt prompt_cr prompt_sp
+
+compinit
 
 if [[ "$COLORTERM" == "xfce4-terminal"  ]] ; then
   export TERM=xterm-256color
@@ -58,7 +63,7 @@ export TERM=xterm-256color
 # Setup virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+source /usr/bin/virtualenvwrapper.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export RLS_GITLAB_TOKEN=i1X6vMkiKmsQNFFasHei

@@ -1,15 +1,14 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # encoding: utf-8
-import sh
+import subprocess as sp
 
 def cnt(cmd):
-    try:
-        return int(sh.wc(cmd(_ok_code=xrange(256)), '-l').stdout)
-    except:
-        return 0
+    p = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
+    stdout = p.communicate()[0].decode().strip()
+    return len(stdout.split('\n')) if len(stdout) > 0 else 0
 
-print '{} %{{T4}}%{{F#b16286}}%{{F-}}%{{T-}} {}'.format(
-    cnt(sh.checkupdates),
-    cnt(sh.cower.bake('-u'))
-)
 
+print('{} %{{T4}}%{{F#b16286}}%{{F-}}%{{T-}} {}'.format(
+    cnt(['checkupdates']),
+    cnt(['yay', '-Qua'])
+))
