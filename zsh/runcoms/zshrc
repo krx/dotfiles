@@ -61,9 +61,9 @@ export TERM=xterm-256color
 #source /home/krx/tools/anaconda3/etc/profile.d/conda.sh
 
 # Setup virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/dev
-source /usr/bin/virtualenvwrapper.sh
+#export WORKON_HOME=$HOME/.virtualenvs
+#export PROJECT_HOME=$HOME/dev
+#source /usr/bin/virtualenvwrapper.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export RLS_GITLAB_TOKEN=i1X6vMkiKmsQNFFasHei
