@@ -28,7 +28,8 @@ config_dirs = [
     'rofi',
     'gsimplecal',
     'libinput-gestures.conf',
-    'autostart'
+    'autostart',
+    'nvim'
 ]
 
 
