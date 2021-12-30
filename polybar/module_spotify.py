@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
-import sh
+import subprocess as sp
 
+TIMEOUT = 2
 song = artist = status = ''
+
 try:
-    sh.pgrep('spotify')
-    song   = sh.spotifyctl('song', '-f').stdout.strip().decode()
-    artist = sh.spotifyctl('artist', '-f').stdout.strip().decode()
-    status = sh.spotifyctl('status').stdout.strip().decode()
-except:
+    sp.check_output(['pgrep', 'spotify'])
+    song = sp.run(['spotifyctl', 'song', '-f'],
+                  timeout=TIMEOUT,
+                  capture_output=True).stdout.strip().decode()
+    artist = sp.run(['spotifyctl', 'artist', '-f'],
+                    timeout=TIMEOUT,
+                    capture_output=True).stdout.strip().decode()
+    status = sp.run(['spotifyctl', 'status'],
+                    timeout=TIMEOUT,
+                    capture_output=True).stdout.strip().decode()
+except sp.CalledProcessError:
     pass
 
 col = (

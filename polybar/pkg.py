@@ -2,9 +2,9 @@
 # encoding: utf-8
 import subprocess as sp
 
+
 def cnt(cmd):
-    p = sp.Popen(cmd, stdout=sp.PIPE, stderr=sp.PIPE)
-    stdout = p.communicate()[0].decode().strip()
+    stdout = sp.run(cmd, capture_output=True).stdout.decode().strip()
     return len(stdout.split('\n')) if len(stdout) > 0 else 0
 
 

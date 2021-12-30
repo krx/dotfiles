@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
-import os
-import sh
+from pathlib import Path
+import subprocess as sp
 import sys
 import shutil
 
-# shorter
-join = os.path.join
+DIR = Path(__file__).parent.absolute()
+HOME = Path('~').expanduser()
 
-DIR = os.path.dirname(os.path.abspath(__file__))
-HOME = os.path.expanduser('~')
 
 basic_dots = {
     'git':       'gitconfig',
@@ -33,67 +31,57 @@ config_dirs = [
 ]
 
 
-def lnk(src, dst):
-    if os.path.isfile(dst) or os.path.islink(dst):
-        print('WARNING: File at \'{}\' already exists, ignoring...'.format(dst))
+def lnk(src: Path, dst: Path):
+    if dst.is_file() or dst.is_symlink():
+        print(f'WARNING: File at \'{dst}\' already exists, ignoring...')
         return
-    sh.ln('-s', src, dst)
+    sp.run(['ln', '-s', src, dst])
 
 
 def link_home(name):
-    lnk(join(DIR, name), join(HOME, '.{}'.format(name)))
+    lnk(DIR / name, HOME / f'.{name}')
 
 
 def link_config_dir(src):
-    lnk(join(DIR, src), join(HOME, '.config', src))
-
-
-def mkdir_p(path):
-    try:
-        os.makedirs(path)
-    except:
-        pass
+    lnk(DIR / src, HOME / '.config' / src)
 
 
 def setup_vim():
-    autoload = join(HOME, '.vim', 'autoload')
-    mkdir_p(autoload)
-    sh.curl('-fLo', join(autoload, 'plug.vim'), 'https://raw.github.com/junegunn/vim-plug/master/plug.vim')
+    autoload = HOME / '.vim' / 'autoload'
+    autoload.mkdir(parents=True, exist_ok=True)
+    sp.run(['curl', '-fLo', autoload / 'plug.vim', 'https://raw.github.com/junegunn/vim-plug/master/plug.vim'])
     link_home('vimrc')
-
-    print('  Running PlugInstall')
-    sh.vim('+PlugInstall', '+qall')
 
 
 def setup_zsh():
-    prezto = join(HOME, '.zprezto')
-    if not os.path.isdir(prezto):
-        sh.git('clone', '--recursive', 'https://github.com/sorin-ionescu/prezto.git', prezto)
-        sh.zsh('-c', 'setopt EXTENDED_GLOB; for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do ln -sf "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done')
+    prezto = HOME / '.zprezto'
+    if not prezto.is_dir():
+        sp.run(['git', 'clone', '--recursive', 'https://github.com/sorin-ionescu/prezto.git'], prezto)
+        sp.run('zsh -c setopt EXTENDED_GLOB; for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do ln -sf "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done', shell=True)
 
-    lnk(join(DIR, 'zsh', 'prompt_krx_setup'), join(prezto, 'modules', 'prompt', 'functions'))
-    shutil.rmtree(join(prezto, 'runcoms'))
-    lnk(join(DIR, 'zsh', 'runcoms'), join(prezto, 'runcoms'))
+    lnk(DIR / 'zsh' / 'prompt_krx_setup', prezto / 'modules' / 'prompt' / 'functions')
+    shutil.rmtree(prezto / 'runcoms')
+    lnk(DIR / 'zsh' / 'runcoms', prezto / 'runcoms')
 
 
 def setup_gdb():
-    peda = join(HOME, 'tools', 'peda')
-    if not os.path.isdir(peda):
-        sh.git('clone', 'https://github.com/longld/peda', peda)
+    peda = HOME / 'tools' / 'peda'
+    if not peda.is_dir():
+        sp.run(['git', 'clone', 'https://github.com/longld/peda', peda])
     link_home('gdbinit')
 
 
 def setup_bin():
-    lnk(join(DIR, 'bin'), join(HOME, 'bin'))
+    lnk(DIR / 'bin', HOME / 'bin')
 
 
 if __name__ == '__main__':
     for dot in sys.argv[1:]:
-        print('Installing {}...'.format(dot))
+        print(f'Installing {dot}...')
         try:
             link_home(basic_dots[dot]) if dot in basic_dots else \
                 link_config_dir(dot) if dot in config_dirs else \
-                globals()['setup_{}'.format(dot)]()
+                globals()[f'setup_{dot}']()
         except Exception as e:
-            print('Error installing {}:'.format(dot), e)
+            print(f'Error installing {dot}:', e)
 
