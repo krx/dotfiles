@@ -6,7 +6,8 @@ fi
 setopt +C #Forgot what this is for, but pretty sure it's important
 
 alias tmux='tmux -2'
-alias vi='vim'
+alias vi='nvim'
+alias vim='nvim'
 #alias pip='sudo pip'
 #alias gem='sudo gem'
 
@@ -64,3 +65,23 @@ source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 export RLS_GITLAB_TOKEN=i1X6vMkiKmsQNFFasHei
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+function arm_now() {
+
+    DOCKER_REDIR=""
+    for i in "$@"
+        do
+        if [[ $i = "--redir="* ]]; then
+            REDIR=`echo $i | cut -f 2 -d "="`
+            # tcp:8000::80
+            PROTO=`echo $REDIR | cut -f 1 -d ":"`
+            OUT=`echo $REDIR | cut -f 2 -d ":"`
+            IN=`echo $REDIR | cut -f 4 -d ":"`
+            # OUT->OUT for docker, OUT->IN for qemu
+            DOCKER_REDIR="$DOCKER_REDIR -p $OUT:$OUT/$PROTO"
+        fi
+    done
+
+    sudo docker run -it --name arm_now -v "$PWD":/mount $DOCKER_REDIR --rm bannsec/arm_now_docker arm_now $@
+}
+

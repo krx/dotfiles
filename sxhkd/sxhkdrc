@@ -141,7 +141,7 @@ XF86Audio{Prev,Next,Play}
 # Misc {{{
 
 super + alt + l
-    i3lock-krx
+    gnome-screensaver-command -l
 
 XF86PowerOff
     systemctl suspend
@@ -151,8 +151,9 @@ super + F7
 
 {_,super + } Print
     maim --hidecursor {_,-s} /tmp/screenshot.png; \
-    upload -r /tmp/screenshot.png; \
-    notify-send 'Screenshot uploaded'
+    xclip -selection clipboard -target image/png -i /tmp/screenshot.png; \
+    notify-send 'Screenshot copied!'
+    #upload -r /tmp/screenshot.png; \
 
 # }}}
 

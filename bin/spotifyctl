@@ -101,7 +101,7 @@ def _get_track(tid, track, client):
         # Token is still valid
         spot = OAuth2Session(token={'access_token': track['oauth']})
 
-    tinfo = spot.get(f'https://api.spotify.com/v1/tracks/{tid.split(":")[-1]}').json()
+    tinfo = spot.get(f'https://api.spotify.com/v1/tracks/{tid.split("/")[-1]}').json()
 
     track['artist'] = ', '.join(artist['name'] for artist in tinfo['artists'])
     track['album'] = tinfo['album']['name']

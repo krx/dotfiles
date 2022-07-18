@@ -4,7 +4,7 @@ source ~/.zprofile
 export PATH
 
 #~/bin/setup-xinput &
-xbindkeys &
+#xbindkeys &
 
 # Start up audio
 #pulseaudio --start

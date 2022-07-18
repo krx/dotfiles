@@ -1,0 +1,13 @@
+configuration {
+    bw: 0;
+    font: "Input Mono Bold 22";
+    modi: "run,window,kill:~/.config/rofi/rofi_kill.sh,drun";
+    lines: 8;
+    hide-scrollbar: true;
+    matching: "fuzzy";
+    separator-style: "none";
+    show-icons: true;
+}
+
+
+@import "gruvbox-dark.rasi"

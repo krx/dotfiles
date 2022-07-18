@@ -37,9 +37,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " }}}
 " Code Helpers {{{
-Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 "Plug 'suan/vim-instant-markdown'
 " }}}
 " 'HUD' {{{
@@ -194,8 +196,8 @@ nnoremap <C-t> :BTags<CR>
 nnoremap <C-]> :Ag<CR>
 
 " Better comment shortcut (ctrl-/)
-nnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
-vnoremap <C-_> :call NERDComment("n", "Toggle")<CR>
+nnoremap <C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
+vnoremap <C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
 
 " Disable pageup/down (thanks Dell)
 nnoremap <PageUp> <Nop>
@@ -239,6 +241,10 @@ endif
 
 " Just write damn it
 cnoremap w!! w !sudo tee % >/dev/null
+
+" Don't hide quotes for json
+autocmd Filetype json
+  \ let g:indentLine_setConceal = 0
 " }}}
 
 " }}}
@@ -316,6 +322,7 @@ au VimEnter * :RainbowParentheses
 " deoplete {{{
 let g:echodoc_enable_at_startup = 1
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-10/lib/libclang-10.so'
 "let g:deoplete#enable_smart_case = 1
 call deoplete#custom#option('smart_case', v:true)
 "let g:deoplete#auto_completion_start_length = 1
@@ -414,4 +421,8 @@ let g:python_highlight_all = 1
 let g:better_whitespace_guicolor='#3C3836'
 let g:strip_whitespace_confirm = 0
 set conceallevel=0
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " }}}
