@@ -56,6 +56,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'keith/swift.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'rust-lang/rust.vim'
+Plug 'fladson/vim-kitty'
 " }}}
 
 call plug#end()

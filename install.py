@@ -27,7 +27,10 @@ config_dirs = [
     'gsimplecal',
     'libinput-gestures.conf',
     'autostart',
-    'nvim'
+    'nvim',
+    'kitty',
+    'yabai',
+    'skhd'
 ]
 
 
