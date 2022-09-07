@@ -55,6 +55,7 @@ Plug 'baskerville/vim-sxhkdrc'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'keith/swift.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'fladson/vim-kitty'
 " }}}
 
 call plug#end()
