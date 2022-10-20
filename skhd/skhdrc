@@ -12,6 +12,10 @@ alt - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d
 
 # Reload yabai config
 cmd + alt + shift - r : $HOME/.config/yabai/yabairc
+
+# Close window
+alt - q : yabai -m window --close
+
 # }}}
 # Layout controls {{{
 
