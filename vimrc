@@ -31,7 +31,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'lilydjwg/colorizer'
 " }}}
 " Quick Nav {{{
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 "Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -50,7 +50,7 @@ Plug 'airblade/vim-gitgutter'
 " }}}
 " Langs {{{
 Plug 'vim-python/python-syntax'
-Plug 'smancill/conky-syntax.vim'
+"Plug 'smancill/conky-syntax.vim'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'keith/swift.vim'
@@ -277,31 +277,31 @@ set t_Co=256
 "highlight LineNr ctermfg=grey ctermbg=none
 " }}}
 " NERDTree settings {{{
-nnoremap <leader>t :NERDTreeToggle<CR>
+"nnoremap <leader>t :NERDTreeToggle<CR>
 
-" Store the bookmarks file
-let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+"" Store the bookmarks file
+"let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
 
-" Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
+"" Show the bookmarks table on startup
+"let NERDTreeShowBookmarks=1
 
-" Show hidden files, too
-let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
+"" Show hidden files, too
+"let NERDTreeShowFiles=1
+"let NERDTreeShowHidden=1
 
-" Quit if NERDTree is the last buffer
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"" Quit if NERDTree is the last buffer
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Highlight the selected entry in the tree
-let NERDTreeHighlightCursorline=1
+"" Highlight the selected entry in the tree
+"let NERDTreeHighlightCursorline=1
 
-" Use a single click to fold/unfold directories and a double click to open
-" files
-let NERDTreeMouseMode=2
+"" Use a single click to fold/unfold directories and a double click to open
+"" files
+"let NERDTreeMouseMode=2
 
-" Don't display these kinds of files
-let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '__pycache__', '\.DS_Store' ]
+"" Don't display these kinds of files
+"let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
+            "\ '\.o$', '\.so$', '\.egg$', '^\.git$', '__pycache__', '\.DS_Store' ]
 
 " }}}
 " Rainbow Parens {{{

@@ -160,6 +160,13 @@ path=(
   /usr/local/{bin,sbin}
   /home/krx/bin
   /home/krx/.local/bin
+  /Users/krx/bin
+  /Users/krx/.local/bin
+  /Users/krx/Library/Python/3.10/bin
+  /Users/krx/Library/Android/sdk/platform-tools
+  "/Applications/010 Editor.app/Contents/CmdLine"
+  /opt/homebrew/bin
+  /Users/krx/tools/parfait/bin
   $path
 )
 
