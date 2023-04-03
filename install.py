@@ -57,15 +57,9 @@ def setup_vim():
 
 
 def setup_zsh():
-    prezto = HOME / '.zprezto'
-    if not prezto.is_dir():
-        sp.run(['git', 'clone', '--recursive', 'https://github.com/sorin-ionescu/prezto.git', prezto])
-        sp.run('zsh -c setopt EXTENDED_GLOB; for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do ln -sf "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done', shell=True)
-
-    lnk(DIR / 'zsh' / 'prompt_krx_setup', prezto / 'modules' / 'prompt' / 'functions')
-    shutil.rmtree(prezto / 'runcoms')
-    lnk(DIR / 'zsh' / 'runcoms', prezto / 'runcoms')
-
+    link_home('zshrc')
+    link_home('zimrc')
+    sp.run('curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh', shell=True)
 
 def setup_gdb():
     peda = HOME / 'tools' / 'peda'

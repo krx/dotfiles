@@ -9,7 +9,7 @@
 	required = true
 	process = git-lfs filter-process
 [core]
-	editor = vim
+	editor = nvim
 [rebase]
 	autostash = true
 [pull]
@@ -17,3 +17,11 @@
 	autostash = true
 [push]
 	default = simple
+[diff]
+  tool = vscode
+[difftool "vscode"]
+  cmd = code --wait --diff --new-window $LOCAL $REMOTE
+[merge]
+  tool = vscode
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
