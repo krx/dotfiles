@@ -31,15 +31,15 @@ config_dirs = [
 ]
 
 
-def lnk(src: Path, dst: Path):
-    if dst.is_file() or dst.is_symlink():
+def lnk(src: Path, dst: Path, force=False):
+    if not force and (dst.is_file() or dst.is_symlink()):
         print(f'WARNING: File at \'{dst}\' already exists, ignoring...')
         return
-    sp.run(['ln', '-s', src, dst])
+    sp.run(['ln', '-sf', src, dst])
 
 
-def link_home(name):
-    lnk(DIR / name, HOME / f'.{name}')
+def link_home(name, force=False):
+    lnk(DIR / name, HOME / f'.{name}', force)
 
 
 def link_config_dir(src):
@@ -54,14 +54,9 @@ def setup_vim():
 
 
 def setup_zsh():
-    prezto = HOME / '.zprezto'
-    if not prezto.is_dir():
-        sp.run(['git', 'clone', '--recursive', 'https://github.com/sorin-ionescu/prezto.git'], prezto)
-        sp.run('zsh -c setopt EXTENDED_GLOB; for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do ln -sf "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"; done', shell=True)
-
-    lnk(DIR / 'zsh' / 'prompt_krx_setup', prezto / 'modules' / 'prompt' / 'functions')
-    shutil.rmtree(prezto / 'runcoms')
-    lnk(DIR / 'zsh' / 'runcoms', prezto / 'runcoms')
+    sp.run('curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh', shell=True)
+    link_home('zshrc', True)
+    link_home('zimrc', True)
 
 
 def setup_gdb():
