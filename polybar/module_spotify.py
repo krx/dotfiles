@@ -15,7 +15,7 @@ try:
     status = sp.run(['spotifyctl', 'status'],
                     timeout=TIMEOUT,
                     capture_output=True).stdout.strip().decode()
-except sp.CalledProcessError:
+except (sp.CalledProcessError, sp.TimeoutExpired):
     pass
 
 col = (

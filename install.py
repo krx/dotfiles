@@ -79,4 +79,5 @@ if __name__ == '__main__':
                 globals()[f'setup_{dot}']()
         except Exception as e:
             print(f'Error installing {dot}:', e)
+            raise e
 
