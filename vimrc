@@ -1,5 +1,6 @@
 set nocompatible
 set encoding=utf-8
+set shell=/bin/bash
 
 " vim-plug setup {{{
 " Load vim-plug
@@ -26,7 +27,7 @@ Plug 'zchee/deoplete-clang'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 Plug 'Yggdroot/indentLine'
 Plug 'lilydjwg/colorizer'
 " }}}
@@ -195,8 +196,8 @@ nnoremap <C-t> :BTags<CR>
 nnoremap <C-]> :Ag<CR>
 
 " Better comment shortcut (ctrl-/)
-nnoremap <C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
-vnoremap <C-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
+nnoremap <leader>/ :call nerdcommenter#Comment("n", "Toggle")<CR>
+vnoremap <leader>/ :call nerdcommenter#Comment("n", "Toggle")<CR>
 
 " Disable pageup/down (thanks Dell)
 nnoremap <PageUp> <Nop>
@@ -267,7 +268,7 @@ let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 " }}}
 " Theme {{{
-colorscheme gruvbox
+"colorscheme gruvbox
 set guifont=Input:h14
 let g:gruvbox_contrast_dark="medium"
 set termguicolors
