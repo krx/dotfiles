@@ -167,9 +167,11 @@ path=(
   "/Applications/010 Editor.app/Contents/CmdLine"
   /opt/homebrew/bin
   /Users/krx/tools/parfait/bin
+  /Users/krx/tools/depot_tools
   $path
 )
 
+alias ll='ls -l'
 alias la='l'
 alias vi='nvim'
 alias vim='nvim'

@@ -8,7 +8,7 @@ alt - p : skhd -k 'cmd - space'
 
 # Main controls {{{
 # Open new terminal
-alt - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+alt - return : /Applications/kitty.app/Contents/MacOS/kitty -d ~
 
 # Reload yabai config
 cmd + alt + shift - r : $HOME/.config/yabai/yabairc
