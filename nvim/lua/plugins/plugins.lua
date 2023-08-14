@@ -5,7 +5,7 @@ return {
     "echasnovski/mini.indentscope",
     opts = {
       draw = {
-        animation = function(s, n)
+        animation = function(_, _)
           return 10
         end,
       },
@@ -15,6 +15,8 @@ return {
     "akinsho/bufferline.nvim",
     opts = {
       options = {
+        style_preset = require("bufferline").style_preset.no_italic,
+        separator_style = "slant",
         numbers = function(o)
           return o.raise(o.ordinal)
         end,
