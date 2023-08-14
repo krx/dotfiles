@@ -32,5 +32,22 @@ vim.keymap.set("!", "<F1>", "<esc>")
 vim.keymap.set("i", "<C-x>", "<C-o>dd")
 
 -- sudo helpers
-vim.keymap.set("c", "e!!", "SudaRead")
-vim.keymap.set("c", "w!!", "SudaWrite")
+vim.keymap.set("c", "E", "SudaRead")
+vim.keymap.set("c", "W", "SudaWrite")
+
+-- bufline helpers
+--   abs number - keys (1..0) -> bufs (1..10)
+local bl = require("bufferline")
+for i = 1, 10 do
+  vim.keymap.set("n", string.format("<leader>%d", i % 10), function()
+    bl.go_to(i, true)
+  end)
+end
+
+--  prev/next
+vim.keymap.set("n", "<leader>`", function()
+  bl.cycle(-1)
+end)
+vim.keymap.set("n", "<leader>-", function()
+  bl.cycle(1)
+end)

@@ -11,4 +11,14 @@ return {
       },
     },
   },
+  {
+    "akinsho/bufferline.nvim",
+    opts = {
+      options = {
+        numbers = function(o)
+          return o.raise(o.ordinal)
+        end,
+      },
+    },
+  },
 }
