@@ -9,6 +9,7 @@ vim.o.copyindent = true
 vim.o.visualbell = true
 vim.o.termguicolors = true
 vim.o.mouse = "a"
+vim.o.foldmethod = "marker"
 
 -- disable comments going to next line
 vim.o.formatoptions = vim.o.formatoptions:gsub("[crv]", "")
