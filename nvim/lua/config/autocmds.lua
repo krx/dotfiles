@@ -19,3 +19,10 @@ vim.api.nvim_create_autocmd("BufNewFile", {
     vim.cmd('0put =\\"#!/usr/bin/env bash\\<nl>\\"|$')
   end,
 })
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = "*.py",
+  callback = function()
+    vim.cmd('0put =\\"#!/usr/bin/env python\\<nl>\\"|$')
+  end,
+})
