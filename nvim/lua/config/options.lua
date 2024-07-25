@@ -10,14 +10,18 @@ vim.o.visualbell = true
 vim.o.termguicolors = true
 vim.o.mouse = "a"
 vim.o.foldmethod = "marker"
+vim.g.autoformat = false
 
 -- disable comments going to next line
 vim.o.formatoptions = vim.o.formatoptions:gsub("[crv]", "")
 
 if vim.fn.has("gui_macvim") then
-  vim.o.fu = true
+  vim.g.fu = true
 end
 
 -- searching
 vim.o.ignorecase = true
 vim.o.smartcase = true
+--
+-- vim.g.lazyvim_python_ruff = "ruff_lsp"
+-- vim.g.lazyvim_python_lsp = ""

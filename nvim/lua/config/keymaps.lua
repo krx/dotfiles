@@ -32,8 +32,8 @@ vim.keymap.set("!", "<F1>", "<esc>")
 vim.keymap.set("i", "<C-x>", "<C-o>dd")
 
 -- sudo helpers
-vim.keymap.set("c", "E", "SudaRead")
-vim.keymap.set("c", "W", "SudaWrite")
+vim.keymap.set("c", "e!!", "SudaRead")
+vim.keymap.set("c", "w!!", "SudaWrite")
 
 -- bufline helpers
 --   abs number - keys (1..0) -> bufs (1..10)
