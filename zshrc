@@ -206,6 +206,5 @@ stty -ixon
 
 export TERM=xterm-256color
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/krx/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --zsh)"
