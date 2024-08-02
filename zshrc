@@ -208,3 +208,4 @@ export TERM=xterm-256color
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
+test -e "$HOME/.shellfishrc" && source "$HOME/.shellfishrc"
