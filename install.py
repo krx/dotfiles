@@ -30,7 +30,8 @@ config_dirs = [
     'nvim',
     'kitty',
     'yabai',
-    'skhd'
+    'skhd',
+    'zellij'
 ]
 
 
