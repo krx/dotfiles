@@ -1,10 +1,14 @@
 [init]
-        defaultBranch = main
+	defaultBranch = main
 [user]
 	name = Kareem ElFaramawi
 	email = kareem02@gmail.com
-[credential]
-	helper = store
+[credential "https://github.com"]
+        helper =
+        helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+        helper =
+        helper = !/usr/bin/gh auth git-credential
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -19,6 +23,7 @@
 	autostash = true
 [push]
 	default = simple
+	autoSetupRemote = true
 [diff]
   tool = vscode
 [difftool "vscode"]
@@ -27,5 +32,3 @@
   tool = vscode
 [mergetool "vscode"]
   cmd = code --wait $MERGED
-[init]
-	defaultBranch = main
