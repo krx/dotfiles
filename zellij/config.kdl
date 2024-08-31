@@ -43,6 +43,7 @@ keybinds {
     unbind "Ctrl t" // was Tab, now Alt-b
     unbind "Ctrl g" // was Locked, now Alt-g
     unbind "Ctrl q" // was Quit, now Alt-q
+    unbind "Ctrl b" // was tmux
     bind "Alt g" { SwitchToMode "locked"; }
     bind "Alt q" { Quit; }
     bind "Alt t" { NewTab; }
