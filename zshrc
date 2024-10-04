@@ -160,6 +160,7 @@ path=(
   /usr/local/{bin,sbin}
   /home/krx/bin
   /home/krx/.local/bin
+  /home/krx/.cargo/bin
   /Users/krx/bin
   /Users/krx/.local/bin
   /Users/krx/Library/Python/3.10/bin
@@ -209,3 +210,11 @@ export TERM=xterm-256color
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
 test -e "$HOME/.shellfishrc" && source "$HOME/.shellfishrc"
+
+eval "$(espup completions zsh 2>/dev/null)"
+eval "$(espflash completions zsh 2>/dev/null)"
+
+source "$HOME/.rye/env"
+eval "$(rye self completion -s zsh)"
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
