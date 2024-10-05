@@ -56,5 +56,12 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "kdl" } },
-  }
+  },
+  { "lkhphuc/jupyter-kernel.nvim" },
+  {
+    "nvim-cmp",
+    opts = function(_, opts)
+      table.insert(opts.sources, { name = "jupyter" })
+    end,
+  },
 }
