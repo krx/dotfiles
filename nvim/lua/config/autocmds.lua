@@ -26,3 +26,10 @@ vim.api.nvim_create_autocmd("BufNewFile", {
     vim.cmd('0put =\\"#!/usr/bin/env python\\<nl>\\"|$')
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.textwidth = 80
+  end,
+})
