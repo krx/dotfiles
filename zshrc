@@ -1,12 +1,4 @@
-# Start configuration added by Zim install {{{
-#
-# User configuration sourced by interactive shells
-#
-
-# -----------------
-# Zsh configuration
-# -----------------
-
+# Begin configuration added by Zim install {{{
 #
 # History
 #
@@ -131,22 +123,13 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 # }}} End configuration added by Zim install
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Browser
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
-fi
-
-# Editors
-export EDITOR='nvim'
-export VISUAL='nvim'
-export PAGER='less'
-
 # Language
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
+fi
+
+if [[ -z ${HOME} ]]; then
+    HOME=/home/krx
 fi
 
 # Paths
@@ -155,24 +138,33 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /sbin
-  /usr/sbin
-  /usr/local/{bin,sbin}
-  /home/krx/bin
-  /home/krx/.local/bin
-  /home/krx/.cargo/bin
-  /Users/krx/bin
-  /Users/krx/.local/bin
-  /Users/krx/Library/Python/3.10/bin
-  /Users/krx/Library/Android/sdk/platform-tools
-  "/Applications/010 Editor.app/Contents/CmdLine"
-  /opt/homebrew/bin
-  /Users/krx/tools/parfait/bin
-  /Users/krx/tools/depot_tools
+  {,/usr,/usr/local}/{bin,sbin}
+  ${HOME}/bin
+  ${HOME}/.local/bin
+  ${HOME}/.cargo/bin
   $path
 )
 
-alias ll='ls -l'
+if [[ "$OSTYPE" == darwin* ]]; then
+  export BROWSER='open'
+  path=(
+    /Users/krx/bin
+    /Users/krx/.local/bin
+    /Users/krx/Library/Python/3.10/bin
+    /Users/krx/Library/Android/sdk/platform-tools
+    "/Applications/010 Editor.app/Contents/CmdLine"
+    /opt/homebrew/bin
+    /Users/krx/tools/parfait/bin
+    /Users/krx/tools/depot_tools
+    $path
+  )
+fi
+
+# Editors
+export EDITOR='nvim'
+export VISUAL='nvim'
+export PAGER='less'
+
 alias la='l'
 alias vi='nvim'
 alias vim='nvim'
@@ -207,16 +199,25 @@ stty -ixon
 
 export TERM=xterm-256color
 
+function try_source() {
+    [[ -f $1 ]] && source $1
+}
+
+function try_eval() {
+    command -v $1 >/dev/null && eval "$($@ 2>/dev/null)"
+}
+
 # Set up fzf key bindings and fuzzy completion
-eval "$(fzf --zsh)"
-test -e "$HOME/.shellfishrc" && source "$HOME/.shellfishrc"
+try_source "${HOME}/.fzf.zsh"
+try_eval fzf --zsh
 
-eval "$(espup completions zsh 2>/dev/null)"
-eval "$(espflash completions zsh 2>/dev/null)"
+try_source "${HOME}/.shellfishrc"
 
-source "$HOME/.rye/env"
-eval "$(rye self completion -s zsh)"
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
-eval "$(rustup completions zsh)"
-# eval "$(rustup completions zsh cargo)"
+try_eval espup completions zsh
+try_eval espflash completions zsh
+
+try_source "${HOME}/.rye/env"
+try_eval rye self completion -s zsh
+try_eval uv generate-shell-completion zsh
+try_eval uvx --generate-shell-completion zsh
+try_eval rustup completions zsh

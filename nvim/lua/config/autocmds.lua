@@ -33,3 +33,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.textwidth = 80
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    vim.opt_local.formatoptions:remove('r')
+    vim.opt_local.formatoptions:remove('o')
+  end,
+})
