@@ -225,3 +225,7 @@ try_eval rustup completions zsh
 export NVM_DIR="$HOME/.nvm"
 try_source "$NVM_DIR/nvm.sh"
 try_source "$NVM_DIR/bash_completion"
+
+fpath=(~/.zsh $fpath)
+autoload -Uz compinit && compinit
+
