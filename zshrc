@@ -191,6 +191,7 @@ alias pacX='pac -Rns'  # Remove package
 alias pacXO='pac -Cd'  # Remove orphan packages
 
 alias ag='ag --unrestricted --search-binary'
+# alias xxd='xxd -R always'
 
 alias 7z-ultra='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
 
@@ -227,5 +228,5 @@ try_source "$NVM_DIR/nvm.sh"
 try_source "$NVM_DIR/bash_completion"
 
 fpath=(~/.zsh $fpath)
-autoload -Uz compinit && compinit
+# autoload -Uz compinit && compinit
 
