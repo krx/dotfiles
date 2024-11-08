@@ -166,12 +166,8 @@ export VISUAL='nvim'
 export PAGER='less'
 
 alias la='l'
-alias vi='nvim'
+alias v='nvim'
 alias vim='nvim'
-
-alias py2='python2 -m IPython'
-alias py='python3 -m IPython'
-alias py3='python3 -m IPython'
 
 ## Ease of use for apt
 alias apt='sudo apt'
