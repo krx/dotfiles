@@ -223,6 +223,8 @@ export NVM_DIR="$HOME/.nvm"
 try_source "$NVM_DIR/nvm.sh"
 try_source "$NVM_DIR/bash_completion"
 
+try_eval fnm env
+
 fpath=(~/.zsh $fpath)
 # autoload -Uz compinit && compinit
 
