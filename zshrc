@@ -1,3 +1,12 @@
+if [[ -z ${HOME} ]]; then
+    HOME=/home/krx
+fi
+
+fpath=(
+    ${HOME}/.zsh
+    $fpath
+)
+
 # Begin configuration added by Zim install {{{
 #
 # History
@@ -38,14 +47,14 @@ WORDCHARS=${WORDCHARS//[\/]}
 #
 
 # Set a custom prefix for the generated aliases. The default prefix is 'G'.
-#zstyle ':zim:git' aliases-prefix 'g'
+zstyle ':zim:git' aliases-prefix 'g'
 
 #
 # input
 #
 
 # Append `../` to your input for each `.` you type after an initial `..`
-#zstyle ':zim:input' double-dot-expand yes
+zstyle ':zim:input' double-dot-expand yes
 
 #
 # termtitle
@@ -126,10 +135,6 @@ unset key
 # Language
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
-fi
-
-if [[ -z ${HOME} ]]; then
-    HOME=/home/krx
 fi
 
 # Paths
@@ -224,7 +229,3 @@ try_source "$NVM_DIR/nvm.sh"
 try_source "$NVM_DIR/bash_completion"
 
 try_eval fnm env
-
-fpath=(~/.zsh $fpath)
-# autoload -Uz compinit && compinit
-
