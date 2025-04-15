@@ -217,12 +217,15 @@ try_source "${HOME}/.shellfishrc"
 
 try_eval espup completions zsh
 try_eval espflash completions zsh
+try_eval cargo espflash completions zsh
 
 try_source "${HOME}/.rye/env"
 try_eval rye self completion -s zsh
 try_eval uv generate-shell-completion zsh
 try_eval uvx --generate-shell-completion zsh
 try_eval rustup completions zsh
+try_eval fnm completions --shell zsh
+# try_source "${HOME}/.venv/bin/activate"
 
 export NVM_DIR="$HOME/.nvm"
 try_source "$NVM_DIR/nvm.sh"
