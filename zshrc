@@ -153,10 +153,6 @@ path=(
 if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
   path=(
-    /Users/krx/bin
-    /Users/krx/.local/bin
-    /Users/krx/Library/Python/3.10/bin
-    /Users/krx/Library/Android/sdk/platform-tools
     "/Applications/010 Editor.app/Contents/CmdLine"
     /opt/homebrew/bin
     /Users/krx/tools/parfait/bin
@@ -232,3 +228,8 @@ try_source "$NVM_DIR/nvm.sh"
 try_source "$NVM_DIR/bash_completion"
 
 try_eval fnm env
+try_eval /opt/homebrew/bin/brew shellenv
+try_eval wezterm shell-completion --shell zsh
+
+alias scm-ssh='/Users/kareem/.ssh/scm-script.sh'
+scm-ssh start_agent

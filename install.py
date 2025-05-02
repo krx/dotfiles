@@ -31,7 +31,8 @@ config_dirs = [
     'kitty',
     'yabai',
     'skhd',
-    'zellij'
+    'zellij',
+    'wezterm'
 ]
 
 

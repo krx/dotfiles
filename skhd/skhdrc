@@ -5,4 +5,4 @@ alt - escape : skhd -r
 alt - p : skhd -k 'cmd - space'
 
 # Open new terminal
-alt - return : /Applications/kitty.app/Contents/MacOS/kitty -d ~
+alt - return : /Applications/WezTerm.app/Contents/MacOS/wezterm
