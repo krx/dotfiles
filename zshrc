@@ -232,4 +232,4 @@ try_eval /opt/homebrew/bin/brew shellenv
 try_eval wezterm shell-completion --shell zsh
 
 alias scm-ssh='/Users/kareem/.ssh/scm-script.sh'
-scm-ssh start_agent
+scm-ssh start_agent &> /dev/null
