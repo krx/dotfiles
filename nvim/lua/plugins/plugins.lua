@@ -57,6 +57,16 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "kdl" } },
   },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    opts = {
+      completions = {
+        lsp = {
+          enabled = true,
+        },
+      },
+    },
+  },
   -- {
   --   "saghen/blink.compat",
   --   -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
