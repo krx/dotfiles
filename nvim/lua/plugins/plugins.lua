@@ -24,36 +24,6 @@ return {
     },
   },
   {
-    "nvim-lspconfig",
-    opts = {
-      servers = {
-        pyright = {
-          capabilities = (function()
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.publishDiagnostics.tagSupport.valueSet = { 2 }
-            return capabilities
-          end)(),
-          settings = {
-            python = {
-              analysis = {
-                useLibraryCodeForTypes = true,
-                diagnosticSeverityOverrides = {
-                  reportUnusedVariable = "warning", -- or anything
-                },
-                typeCheckingMode = "off",
-              },
-            },
-          },
-        },
-        -- ruff_lsp = {
-        --   on_attach = function(client, _)
-        --     client.server_capabilities.hoverProvider = false
-        --   end,
-        -- },
-      },
-    },
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "kdl" } },
   },
@@ -67,27 +37,14 @@ return {
       },
     },
   },
-  -- {
-  --   "saghen/blink.compat",
-  --   -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
-  --   version = "*",
-  --   -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
-  --   lazy = true,
-  --   -- make sure to set opts so that lazy.nvim calls blink.compat's setup
-  --   opts = {
-  --     impersonate_nvim_cmp = true,
-  --   },
-  -- },
-  -- {
-  --   "saghen/blink.cmp",
-  --   version = "0.*",
-  --   enabled = true,
-  --   sources = {
-  --     compat = { "jupyter" },
-  --   },
-  -- },
-  -- {
-  --   "lkhphuc/jupyter-kernel.nvim",
-  --   opts = {},
-  -- },
+  {
+    "lkhphuc/jupyter-kernel.nvim",
+    opts = {},
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      table.insert(opts.sources, { name = "jupyter" })
+    end,
+  },
 }
