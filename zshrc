@@ -221,6 +221,7 @@ try_eval uv generate-shell-completion zsh
 try_eval uvx --generate-shell-completion zsh
 try_eval rustup completions zsh
 try_eval fnm completions --shell zsh
+export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 # try_source "${HOME}/.venv/bin/activate"
 
 export NVM_DIR="$HOME/.nvm"

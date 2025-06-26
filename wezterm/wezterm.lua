@@ -7,6 +7,7 @@ local config = wezterm.config_builder()
 config.color_scheme = 'GruvboxDark'
 config.font = wezterm.font('CaskaydiaCove Nerd Font Mono')
 config.font_size = 13
+config.window_close_confirmation = 'NeverPrompt'
 config.audible_bell = 'Disabled'
 config.visual_bell = {
   fade_in_function = 'EaseIn',

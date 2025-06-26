@@ -2,7 +2,6 @@
 from pathlib import Path
 import subprocess as sp
 import sys
-import shutil
 
 DIR = Path(__file__).parent.absolute()
 HOME = Path('~').expanduser()
@@ -15,7 +14,8 @@ basic_dots = {
     'r2':        'radare2rc',
     'xmonad':    'xmonad',
     'compton':   'compton.conf',
-    'xbindkeys': 'xbindkeysrc'
+    'xbindkeys': 'xbindkeysrc',
+    'ripgrep':   'ripgreprc'
 }
 
 config_dirs = [
