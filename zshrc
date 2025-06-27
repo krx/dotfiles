@@ -214,6 +214,7 @@ try_source "${HOME}/.shellfishrc"
 try_eval espup completions zsh
 try_eval espflash completions zsh
 try_eval cargo espflash completions zsh
+try_source "${HOME}/export_esp.sh"
 
 try_source "${HOME}/.rye/env"
 try_eval rye self completion -s zsh
