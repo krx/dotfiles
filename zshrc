@@ -157,6 +157,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
     /opt/homebrew/bin
     /Users/krx/tools/parfait/bin
     /Users/krx/tools/depot_tools
+    /Library/TeX/texbin
     $path
   )
 fi

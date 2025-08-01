@@ -19,6 +19,7 @@ zmodule utility
 zmodule exa
 zmodule archive
 zmodule fzf
+zmodule homebrew
 
 #
 # Prompt

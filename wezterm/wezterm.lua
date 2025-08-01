@@ -11,7 +11,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.window_background_opacity = 0.95
   config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 else
-  config.font = wezterm.font("CaskaydiaCove Nerd Font Mono")
+  config.font = wezterm.font("CaskaydiaCove Nerd Font")
   config.font_size = 13
 end
 
