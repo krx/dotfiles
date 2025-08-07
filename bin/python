@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+VIRTUAL_ENV=${VIRTUAL_ENV:-${HOME}/.venv} uv run python "$@"

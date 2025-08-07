@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -t -v "$PWD":/analysis binwalkv3 $@

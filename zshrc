@@ -193,6 +193,8 @@ alias ag='ag --unrestricted --search-binary'
 
 alias 7z-ultra='7z a -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on'
 
+alias py="python -m IPython"
+
 # Stop breaking the terminal when i press C-s
 stty -ixon
 
