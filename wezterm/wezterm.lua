@@ -5,6 +5,7 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+  config.enable_scroll_bar = true
   config.font = wezterm.font("CaskaydiaCove Nerd Font")
   config.font_size = 10
   config.default_domain = "WSL:Arch"
