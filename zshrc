@@ -143,8 +143,8 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  {,/usr,/usr/local}/{bin,sbin}
   ${HOME}/bin
+  {,/usr,/usr/local}/{bin,sbin}
   ${HOME}/.local/bin
   ${HOME}/.cargo/bin
   $path
@@ -219,8 +219,6 @@ try_eval espflash completions zsh
 try_eval cargo espflash completions zsh
 try_source "${HOME}/export_esp.sh"
 
-try_source "${HOME}/.rye/env"
-try_eval rye self completion -s zsh
 try_eval uv generate-shell-completion zsh
 try_eval uvx --generate-shell-completion zsh
 try_eval rustup completions zsh
