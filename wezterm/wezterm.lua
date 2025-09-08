@@ -5,7 +5,6 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-  config.enable_scroll_bar = true
   config.font = wezterm.font("CaskaydiaCove Nerd Font")
   config.font_size = 10
   config.default_domain = "WSL:Arch"
@@ -16,6 +15,7 @@ else
   config.font_size = 13
 end
 
+config.enable_scroll_bar = true
 config.automatically_reload_config = true
 config.color_scheme = "GruvboxDark"
 config.window_close_confirmation = "NeverPrompt"
@@ -29,6 +29,7 @@ config.visual_bell = {
 }
 config.colors = {
   visual_bell = "#ff2020",
+  scrollbar_thumb = "#504945",
 }
 
 -- and finally, return the configuration to wezterm
