@@ -2,7 +2,7 @@ return {
   { "lambdalisue/suda.vim" },
   { "HiPhish/rainbow-delimiters.nvim" },
   {
-    "echasnovski/mini.indentscope",
+    "nvim-mini/mini.indentscope",
     opts = {
       draw = {
         animation = function(_, _)
