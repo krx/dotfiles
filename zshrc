@@ -170,6 +170,7 @@ export PAGER='less'
 alias la='l'
 alias v='nvim'
 alias vim='nvim'
+unalias gh
 
 ## Ease of use for apt
 alias apt='sudo apt'
