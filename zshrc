@@ -4,6 +4,7 @@ fi
 
 fpath=(
     ${HOME}/.zsh
+    /opt/homebrew/share/zsh/site-functions
     $fpath
 )
 
@@ -214,6 +215,7 @@ try_source "${HOME}/.fzf.zsh"
 try_eval fzf --zsh
 
 try_source "${HOME}/.shellfishrc"
+try_source "${HOME}/.bw_session"
 
 try_eval espup completions zsh
 try_eval espflash completions zsh
