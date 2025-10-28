@@ -220,7 +220,7 @@ try_source "${HOME}/.bw_session"
 try_eval espup completions zsh
 try_eval espflash completions zsh
 try_eval cargo espflash completions zsh
-try_source "${HOME}/export_esp.sh"
+try_source "${HOME}/export-esp.sh"
 
 try_eval uv generate-shell-completion zsh
 try_eval uvx --generate-shell-completion zsh
