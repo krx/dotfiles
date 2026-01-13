@@ -236,6 +236,7 @@ try_source "$NVM_DIR/bash_completion"
 try_eval fnm env
 try_eval /opt/homebrew/bin/brew shellenv
 try_eval wezterm shell-completion --shell zsh
+try_eval ossh completion zsh
 
 alias scm-ssh='/Users/kareem/.ssh/scm-script.sh'
 scm-ssh start_agent &> /dev/null
