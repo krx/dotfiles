@@ -10,6 +10,19 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
   config.default_domain = "WSL:Arch"
   config.window_background_opacity = 0.95
   config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
+
+  config.keys = {
+    -- Binding to spawn PowerShell
+    {
+      key = "Y",
+      mods = "CTRL|SHIFT",
+      action = wezterm.action.SpawnCommandInNewTab({
+        label = "PowerShell",
+        args = { "pwsh.exe" },
+        domain = { DomainName = "local" }
+      }),
+    },
+  }
 else
   config.font = wezterm.font("CaskaydiaCove Nerd Font")
   config.font_size = 13
