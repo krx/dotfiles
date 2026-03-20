@@ -24,8 +24,10 @@ end
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+vim.g.lazyvim_python_lsp = "ty"
+
 local function paste()
-vim.o.ignorecase = true
+  vim.o.ignorecase = true
   return {
     vim.split(vim.fn.getreg(""), "\n"),
     vim.fn.getregtype(""),
