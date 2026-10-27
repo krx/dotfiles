@@ -38,16 +38,6 @@ return {
     },
   },
   {
-    "lkhphuc/jupyter-kernel.nvim",
-    opts = {},
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "jupyter" })
-    end,
-  },
-  {
     "gaoDean/autolist.nvim",
     ft = {
       "markdown",
@@ -82,5 +72,16 @@ return {
       vim.keymap.set("n", "dd", "dd<cmd>AutolistRecalculate<cr>")
       vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>")
     end,
+  },
+  {
+    "gbprod/cutlass.nvim",
+    opts = {
+      registers = {
+        select = "_",
+        delete = "_",
+        change = "_",
+      },
+      override_del = true,
+    },
   },
 }

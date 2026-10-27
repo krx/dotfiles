@@ -35,6 +35,9 @@ vim.keymap.set("i", "<C-x>", "<C-o>dd")
 vim.keymap.set("c", "e!!", "SudaRead")
 vim.keymap.set("c", "w!!", "SudaWrite")
 
+-- insane
+vim.keymap.set("x", "p", "P")
+
 -- bufline helpers
 --   abs number - keys (1..0) -> bufs (1..10)
 local bl = require("bufferline")
